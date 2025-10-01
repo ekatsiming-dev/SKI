@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>野澤滑雪互動準備儀表板 | Nozawa Onsen Trip Planner</title>
+    <title>野澤溫泉滑雪之旅 | Nozawa Onsen Trip Planner</title>
     <!-- Chosen Palette: Nozawa Winter -->
     <!-- Application Structure Plan: Inspired by the provided reference, the structure is a complete redesign into a modern, card-based, single-page application. The key change is the introduction of a more dynamic grid layout and dedicated sections for a clearer narrative flow, from high-level planning (Roadmap, Itinerary) to actionable details (Checklist, Budget). A new 'Itinerary' section was added to provide a chronological story of the trip. The most significant interactive enhancement is the dynamic budget calculator with a slider, allowing real-time 'what-if' analysis of personal spending. This structure was chosen to transform the tool from a static checklist into an engaging, visually-driven planning experience that encourages exploration and personalization. -->
     <!-- Visualization & Content Choices: 1. Countdown/Stats (Inform): Redesigned as prominent hero stats with icons. 2. Itinerary (Organize): A new visual timeline component using HTML/CSS to clearly show the day-by-day plan. 3. Interactive Checklist (Interact): UI refreshed with improved styling for buttons and items to match the new theme. 4. Dynamic Budget Calculator (Interact/Analyze): The static budget table is now interactive. A range slider allows users to adjust personal spending, which dynamically updates the total cost and the Chart.js doughnut chart via Vanilla JS. This provides immediate visual feedback on financial planning. Justification: These choices elevate the user experience by making information more digestible (icons, cards), providing a clearer trip narrative (itinerary), and adding powerful, personalized interactivity (budget calculator). -->
@@ -127,6 +127,7 @@
         <nav class="sticky top-4 glass-nav z-20 py-3 mb-20 rounded-full shadow-md border border-gray-200">
             <div class="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-10 text-sm sm:text-base md:text-lg font-semibold">
                 <a href="#itinerary" class="nav-link">行程總覽</a>
+                <a href="#team" class="nav-link">團隊成員</a>
                 <a href="#village-guide" class="nav-link">村莊探索</a>
                 <a href="#ski-guide" class="nav-link">滑雪指南</a>
                 <a href="#food-guide" class="nav-link">美食推薦</a>
@@ -201,6 +202,58 @@
                 </div>
             </section>
             
+            <section id="team">
+                <details open>
+                    <summary>
+                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">團隊成員與分房 
+                            <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </h2>
+                    </summary>
+                    <div class="max-w-4xl mx-auto space-y-12 mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                               成員分組
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold text-slate-700">A. 教練課程組 (6位)</h4>
+                                    <ul class="list-disc list-inside text-slate-600 mt-2">
+                                        <li>子馨</li>
+                                        <li>羽廷</li>
+                                        <li>粉粉</li>
+                                        <li>睦夫</li>
+                                        <li>照照</li>
+                                        <li>思彤</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-700">B. 自由滑雪組 (4位)</h4>
+                                    <ul class="list-disc list-inside text-slate-600 mt-2">
+                                        <li>邱律</li>
+                                        <li>哈比</li>
+                                        <li>Judy</li>
+                                        <li>SuYao</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                               分房規劃
+                            </h3>
+                            <ul class="space-y-3 text-slate-600">
+                                <li><span class="font-semibold">房間一 (2人房):</span> SuYao & 邱律 </li>
+                                <li><span class="font-semibold">房間二 (2人房):</span> 哈比 & 粉粉 </li>
+                                <li><span class="font-semibold">房間三 (2人房):</span> Judy & 照照</li>
+                                <li><span class="font-semibold">房間四 (4人房):</span> 羽廷、子馨、睦夫、思彤</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+            </section>
+
             <section id="village-guide">
                 <details>
                     <summary>
@@ -771,4 +824,3 @@
     </script>
 </body>
 </html>
-
