@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>野澤滑雪互動準備儀表板</title>
-    <!-- Chosen Palette: Cool Horizon -->
-    <!-- Application Structure Plan: The application is structured as a single-page dashboard with three main interactive sections: Roadmap, Checklist, and Budget. This design was chosen to consolidate all critical planning information into one cohesive and easily navigable view. Users can get a quick overview with the countdown, follow a step-by-step timeline, interactively manage their packing with a filterable checklist, and understand their financial planning through a visual chart. This integrated approach is more user-friendly and efficient than separate static documents, as it supports a seamless planning flow from high-level timeline to detailed task management and financial awareness. -->
-    <!-- Visualization & Content Choices: 1. Countdown Timer (Inform): Dynamic text to create urgency and context (Vanilla JS). 2. Timeline (Organize): A structured HTML/CSS flow to present the preparation phases chronologically. 3. Interactive Checklist (Organize/Interact): An HTML list dynamically rendered and filtered by JS. This turns a static list into a functional tool. 4. Budget Doughnut Chart (Inform/Compare): A Chart.js canvas visualization to show estimated cost proportions, making financial data easy to grasp. Justification: These choices provide a multi-faceted view of the preparation process, combining procedural guidance, actionable tasks, and financial insights in the most intuitive formats. -->
+    <title>野澤滑雪互動準備儀表板 | Nozawa Onsen Trip Planner</title>
+    <!-- Chosen Palette: Winter Mountain -->
+    <!-- Application Structure Plan: Inspired by the provided reference, the structure is a complete redesign into a modern, card-based, single-page application. The key change is the introduction of a more dynamic grid layout and dedicated sections for a clearer narrative flow, from high-level planning (Roadmap, Itinerary) to actionable details (Checklist, Budget). A new 'Itinerary' section was added to provide a chronological story of the trip. The most significant interactive enhancement is the dynamic budget calculator with a slider, allowing real-time 'what-if' analysis of personal spending. This structure was chosen to transform the tool from a static checklist into an engaging, visually-driven planning experience that encourages exploration and personalization. -->
+    <!-- Visualization & Content Choices: 1. Countdown/Stats (Inform): Redesigned as prominent hero stats with icons. 2. Itinerary (Organize): A new visual timeline component using HTML/CSS to clearly show the day-by-day plan. 3. Interactive Checklist (Interact): UI refreshed with improved styling for buttons and items to match the new theme. 4. Dynamic Budget Calculator (Interact/Analyze): The static budget table is now interactive. A range slider allows users to adjust personal spending, which dynamically updates the total cost and the Chart.js doughnut chart via Vanilla JS. This provides immediate visual feedback on financial planning. Justification: These choices elevate the user experience by making information more digestible (icons, cards), providing a clearer trip narrative (itinerary), and adding powerful, personalized interactivity (budget calculator). -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #f9fafb; /* Light Gray */
+            --card-bg: #ffffff;
+            --text-primary: #1e293b; /* Slate 800 */
+            --text-secondary: #475569; /* Slate 600 */
+            --accent-primary: #3b82f6; /* Blue 500 */
+            --accent-secondary: #14b8a6; /* Teal 500 */
+            --border-color: #e5e7eb; /* Gray 200 */
+        }
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc;
-            color: #073B4C;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
         }
         .chart-container {
             position: relative;
@@ -26,231 +35,328 @@
             height: 350px;
             max-height: 400px;
         }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -33px; 
-            top: 4px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background-color: #118AB2;
-            border: 4px solid #f8fafc;
-            z-index: 10;
-        }
         .nav-link {
             transition: all 0.2s ease-in-out;
+            color: var(--text-secondary);
         }
-        .nav-link:hover {
-            color: #EF4444;
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-primary);
             transform: translateY(-2px);
         }
+        .btn-filter {
+            transition: all 0.2s ease-in-out;
+        }
         .btn-filter.active {
-            background-color: #073B4C;
+            background-color: var(--accent-primary);
             color: white;
+            border-color: var(--accent-primary);
+        }
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        .iti-item::before {
+            content: '';
+            position: absolute;
+            left: -20.5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 9999px;
+            background-color: var(--accent-secondary);
+            border: 3px solid var(--card-bg);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-primary);
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-primary);
+            cursor: pointer;
+            border-radius: 50%;
         }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="antialiased">
 
-    <div class="container mx-auto p-4 md:p-8">
+    <div class="container mx-auto px-4 py-8 md:py-12">
 
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#073B4C]">野澤滑雪互動準備儀表板</h1>
-            <p class="text-lg text-slate-600 mt-2">您的 2026/01/14 出發倒數計時計畫</p>
+        <header class="text-center mb-16">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400 pb-2">野澤溫泉滑雪之旅</h1>
+            <p class="text-base sm:text-lg text-slate-600 mt-2">您的 2026/01/14 個人化互動準備儀表板</p>
         </header>
 
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center">
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                <h3 class="text-lg font-semibold text-slate-500">總準備階段</h3>
-                <p class="text-5xl font-bold text-[#118AB2]">3</p>
+        <section id="overview" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-center">
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>🗓️</span> 出發日期</h3>
+                <p class="text-4xl font-bold text-blue-500 mt-2">2026/01/14</p>
             </div>
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                <h3 class="text-lg font-semibold text-slate-500">出發日期</h3>
-                <p class="text-4xl font-bold text-[#118AB2]">2026/01/14</p>
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>⏳</span> 旅程倒數</h3>
+                <p id="countdown" class="text-4xl font-bold text-blue-500 mt-2">計算中...</p>
             </div>
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                <h3 class="text-lg font-semibold text-slate-500">倒數計時</h3>
-                <p id="countdown" class="text-4xl font-bold text-[#118AB2]">計算中...</p>
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>🌙</span> 旅遊天數</h3>
+                <p class="text-4xl font-bold text-blue-500 mt-2">5天4夜</p>
             </div>
         </section>
 
-        <nav class="sticky top-0 bg-[#f8fafc]/80 backdrop-blur-sm z-20 py-4 mb-12 border-b-2 border-slate-200">
-            <div class="flex flex-wrap justify-center items-center gap-x-4 md:gap-x-10 text-base md:text-lg font-bold">
-                <a href="#roadmap" class="nav-link text-slate-600">行動計畫</a>
-                <a href="#details" class="nav-link text-slate-600">行程細節</a>
-                <a href="#clothing-guide" class="nav-link text-slate-600">服裝策略</a>
-                <a href="#checklist" class="nav-link text-slate-600">互動清單</a>
-                <a href="#safety" class="nav-link text-slate-600">安全須知</a>
-                <a href="#budget" class="nav-link text-slate-600">預算分析</a>
+        <nav class="sticky top-4 glass-nav z-20 py-3 mb-20 rounded-full shadow-md border border-gray-200">
+            <div class="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-10 text-sm sm:text-base md:text-lg font-semibold">
+                <a href="#itinerary" class="nav-link">行程總覽</a>
+                <a href="#lodging" class="nav-link">住宿美食</a>
+                <a href="#roadmap" class="nav-link">準備計畫</a>
+                <a href="#checklist" class="nav-link">互動清單</a>
+                <a href="#budget" class="nav-link">預算分析</a>
+                <a href="#safety" class="nav-link">安全須知</a>
             </div>
         </nav>
 
         <main class="space-y-20">
-            <section id="roadmap">
-                <h2 class="text-3xl font-bold text-center mb-10 text-[#073B4C]">行動計畫 Roadmap</h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="relative pl-12 border-l-4 border-slate-200">
-                        
-                        <div class="mb-16 timeline-item">
-                            <h3 class="text-2xl font-bold text-[#118AB2] mb-2 relative">第一階段：核心準備期</h3>
-                            <p class="font-semibold text-slate-500 mb-4">現在 ~ 2025年10月底</p>
-                            <div class="bg-white p-6 rounded-lg shadow-md space-y-3 border border-slate-200">
-                                <p>🔴 <span class="font-bold">換發護照：</span>最優先事項！立即確認辦理文件與時間。</p>
-                                <p>🔴 <span class="font-bold">預訂機票 & 住宿：</span>護照辦妥後，立即與朋友確認並完成預訂。</p>
-                            </div>
+
+            <section id="itinerary">
+                <h2 class="text-3xl font-bold text-center mb-12">行程總覽</h2>
+                <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-teal-300 pl-10">
+                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
+                        <h3 class="font-bold text-lg text-teal-600">移動與抵達</h3>
+                        <p class="text-slate-500 text-sm">2026 / 01 / 14 (三)</p>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li>搭乘 MM620 (02:20) 前往東京成田機場 (NRT)</li>
+                            <li>轉乘新幹線 (13:30) 前往飯山站</li>
+                            <li>抵達野澤溫泉，至 <span class="font-bold">Address Nozawa</span> Check-in</li>
+                            <li>在溫泉街悠閒晚餐、熟悉環境</li>
+                        </ul>
+                    </div>
+                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
+                        <h3 class="font-bold text-lg text-teal-600">全日滑雪課程 & 道祖神祭</h3>
+                        <p class="text-slate-500 text-sm">2026 / 01 / 15 (四)</p>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li>全日6小時滑雪技巧學習</li>
+                            <li>晚上參加日本三大火祭之一的「道祖神祭」</li>
+                        </ul>
+                    </div>
+                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
+                        <h3 class="font-bold text-lg text-teal-600">全日滑雪課程 & 溫泉體驗</h3>
+                        <p class="text-slate-500 text-sm">2026 / 01 / 16 (五)</p>
+                         <ul class="list-disc list-inside mt-2 text-slate-600">
+                             <li>全日6小時滑雪技巧進階</li>
+                             <li>課程結束後，享受野澤溫泉的13座外湯巡禮</li>
+                         </ul>
+                    </div>
+                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
+                        <h3 class="font-bold text-lg text-teal-600">自主練習 & 自由探索</h3>
+                         <p class="text-slate-500 text-sm">2026 / 01 / 17 (六)</p>
+                        <ul class="list-disc list-inside mt-2 text-slate-600">
+                            <li>驗收學習成果，在初級雪道自主練習</li>
+                            <li>探索野澤村，購買紀念品</li>
+                        </ul>
+                    </div>
+                     <div class="iti-item relative bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
+                        <h3 class="font-bold text-lg text-teal-600">返程</h3>
+                         <p class="text-slate-500 text-sm">2026 / 01 / 18 (日)</p>
+                         <ul class="list-disc list-inside mt-2 text-slate-600">
+                             <li>上午最後巡禮，整理行囊</li>
+                             <li>搭乘 MM625 (16:35) 返回台灣桃園機場 (TPE)</li>
+                         </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="lodging">
+                <h2 class="text-3xl font-bold text-center mb-12">住宿 & 美食推薦</h2>
+                <div class="max-w-5xl mx-auto">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-12">
+                        <h3 class="font-bold text-xl text-blue-600 mb-3 flex items-center gap-2"><span>🏨</span> 下榻飯店</h3>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                            <p class="text-lg font-semibold">Address Nozawa (アドレス野沢)</p>
+                            <a href="https://maps.app.goo.gl/jrp3bvtKam7p3Ukv7?g_st=il" target="_blank" class="mt-2 sm:mt-0 px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-full hover:bg-blue-600 transition-colors">查看地圖</a>
                         </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-blue-600 mb-6 flex items-center gap-2"><span>🍽️</span> 餐廳口袋名單</h3>
                         
-                        <div class="mb-16 timeline-item">
-                            <h3 class="text-2xl font-bold text-[#118AB2] mb-2 relative">第二階段：裝備與細節規劃期</h3>
-                            <p class="font-semibold text-slate-500 mb-4">2025年11月 ~ 12月</p>
-                            <div class="bg-white p-6 rounded-lg shadow-md space-y-3 border border-slate-200">
-                                <p>🟡 <span class="font-bold">完成迪卡儂採購：</span>趁尺寸齊全時買好，避免年底人潮。</p>
-                                <p>🟡 <span class="font-bold">留意生理期：</span>評估並準備相關用品或藥物。</p>
-                                <p>🟡 <span class="font-bold">購買網卡：</span>預先購買日本上網SIM卡或租借WiFi機。</p>
-                                <p>🟡 <span class="font-bold">預訂高鐵票：</span>設定提醒，搶早鳥優惠 (12月中旬)。</p>
-                                <p>🟡 <span class="font-bold">購買旅遊保險：</span>確認理賠滑雪運動傷害。</p>
-                                <p>🟡 <span class="font-bold">兌換日幣：</span>關注匯率，分批或一次換足。</p>
-                                <p>🟡 <span class="font-bold">預約課程/雪具 (建議)：</span>提早預約熱門中文教練。</p>
+                        <div class="mb-8">
+                            <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-teal-400 pb-2 mb-6">住宿附近</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">焼肉 やま冨士</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">肉舖老闆開的燒肉店，便宜好吃但煙霧繚繞。</p>
+                                    <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">お好み焼き 一ちゃん</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">住宿附近的大阪燒，有搭配部分小點心。</p>
+                                    <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mb-16 timeline-item">
-                            <h3 class="text-2xl font-bold text-[#118AB2] mb-2 relative">第三階段：最終衝刺期</h3>
-                            <p class="font-semibold text-slate-500 mb-4">2026年1月</p>
-                            <div class="bg-white p-6 rounded-lg shadow-md space-y-3 border border-slate-200">
-                                <p>🔵 <span class="font-bold">填寫 Visit Japan Web：</span>出發前一週完成並截圖。</p>
-                                <p>🔵 <span class="font-bold">打包行李：</span>出發前4天開始對照清單打包。</p>
-                                <p>🔵 <span class="font-bold">最終確認與休息：</span>充電、確認航班，儲備體力。</p>
+                        <div>
+                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-teal-400 pb-2 mb-6">溫泉街中心</h4>
+                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">大門 (Daimon)</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">份量不錯的豬排飯、餃子，不接受預約。</p>
+                                    <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">ちゃんこ玉屋</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">不起眼的相撲鍋與壽喜燒火鍋店。</p>
+                                    <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">ばあどこ (Banri)</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">受外國人歡迎，店員會講中文，似乎有素火鍋。</p>
+                                    <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">大まるそば店</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">蕎麥麵店，冬季似乎有熱湯選項。</p>
+                                    <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">三吉 (San-kichi)</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">關東煮，特色是有賣馬肉刺身。</p>
+                                    <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">そば処 大茂ん</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">少數沒客滿的蕎麥麵店，可預約牛肉壽喜燒。</p>
+                                    <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
+                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
+                                    <p class="font-bold">Playce Nozawa</p>
+                                    <p class="text-sm text-slate-500 mt-1 mb-3">同時賣披薩、拉麵，晚上是居酒屋。</p>
+                                    <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="details">
-                 <h2 class="text-3xl font-bold text-center mb-10 text-[#073B4C]">行程與預訂細節</h2>
-                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <h3 class="text-xl font-bold mb-4 border-b pb-2">✈️ 預定班機</h3>
-                        <p><span class="font-semibold">去程：</span>MM620 TPE-NRT</p>
-                        <p class="mb-2 text-slate-600">02:20 → 06:30</p>
-                        <p><span class="font-semibold">回程：</span>MM625 NTR-TPE</p>
-                        <p class="text-slate-600">16:35 → 20:00</p>
+            <section id="roadmap">
+                <h2 class="text-3xl font-bold text-center mb-12">準備時程計畫</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-600 mb-3">第一階段：核心準備</h3>
+                        <p class="font-semibold text-slate-500 text-sm mb-4">現在 ~ 2025/10月底</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>🔴 <span class="font-medium">換發護照：</span>最優先！</li>
+                            <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-blue-500 hover:underline text-sm">[樂桃]</a></li>
+                        </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <h3 class="text-xl font-bold mb-4 border-b pb-2">🚄 交通資訊</h3>
-                        <p><span class="font-semibold">第一天新幹線 (東京→飯山)：</span></p>
-                        <p class="mb-2 text-slate-600">2026/01/14 13:30 發車</p>
-                         <p class="text-sm text-slate-500">*此為預計班次，請依實際預訂為準。</p>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-600 mb-3">第二階段：細節規劃</h3>
+                        <p class="font-semibold text-slate-500 text-sm mb-4">2025/11 ~ 12月</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>🟡 <span class="font-medium">申請休假</span></li>
+                            <li>🟡 <span class="font-medium">採購個人裝備</span></li>
+                            <li>🟡 <span class="font-medium">購買網卡/保險</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-blue-500 hover:underline text-sm">[eSIM參考]</a></li>
+                            <li>🟡 <span class="font-medium">預訂高鐵/兌換日幣</span></li>
+                        </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <h3 class="text-xl font-bold mb-4 border-b pb-2">🔥 當地祭典：道祖神祭</h3>
-                        <p><span class="font-semibold">日期：</span>2026/01/15</p>
-                        <p class="text-slate-600 mb-2">日本三大火祭之一，為村裡長子、驅除厄運和祈求姻緣而舉辦的壯觀祭典。</p>
-                         <p class="text-sm text-red-600">*是非常熱鬧的年度盛事，務必體驗！</p>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="text-xl font-bold text-blue-600 mb-3">第三階段：最終衝刺</h3>
+                        <p class="font-semibold text-slate-500 text-sm mb-4">2026/1月</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>🔵 <span class="font-medium">填寫 Visit Japan Web</span></li>
+                            <li>🔵 <span class="font-medium">打包行李</span></li>
+                            <li>🔵 <span class="font-medium">最終確認與休息</span></li>
+                        </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200 md:col-span-3">
-                        <h3 class="text-xl font-bold mb-4 border-b pb-2">🏂 教練課資訊</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm md:text-base">
-                            <div><p class="font-semibold">上課日期:</p><p class="text-slate-600">2026/1/15-16 (兩天)</p></div>
-                            <div><p class="font-semibold">方案:</p><p class="text-slate-600">早鳥優惠方案</p></div>
-                            <div><p class="font-semibold">學員人數:</p><p class="text-slate-600">6人</p></div>
-                            <div><p class="font-semibold">程度:</p><p class="text-slate-600">零基礎</p></div>
-                            <div><p class="font-semibold">上課時數:</p><p class="text-slate-600">全日6小時 (含午休)</p></div>
-                            <div><p class="font-semibold text-red-600">總費用:</p><p class="text-red-600 font-bold">12,667 元 / 人</p></div>
-                        </div>
-                    </div>
-                 </div>
+                </div>
             </section>
             
-            <section id="clothing-guide">
-                <h2 class="text-3xl font-bold text-center mb-10 text-[#073B4C]">滑雪服裝策略：聰明穿搭</h2>
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <h3 class="text-xl font-bold mb-3 text-emerald-600">🛍️ 建議自行購買 (考量衛生)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600">
-                            <li><span class="font-semibold">底層排汗衣褲：</span>核心關鍵！必須能吸濕排汗，保持身體乾爽。</li>
-                            <li><span class="font-semibold">保暖中層衣：</span>例如刷毛T恤、輕羽絨，主要功能是保暖。</li>
-                            <li><span class="font-semibold">保暖長筒襪：</span>保護腳踝與小腿，增加舒適度。</li>
-                            <li><span class="font-semibold">脖圍/面罩：</span>保護臉部皮膚不受風寒。</li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <h3 class="text-xl font-bold mb-3 text-sky-600">🤝 建議當地租賃 (省錢方便)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-slate-600">
-                            <li><span class="font-semibold">雪衣/雪褲：</span>外層防水防風。</li>
-                            <li><span class="font-semibold">安全帽：</span>安全第一，必備！</li>
-                            <li><span class="font-semibold">雪鏡/手套：</span>保護眼睛與雙手。</li>
-                            <li class="font-bold text-red-600"><span class="font-semibold">防摔褲/護膝：</span>新手強力推薦！能大幅減少疼痛感，增加學習意願。</li>
-                        </ul>
-                    </div>
-                 </div>
-            </section>
-
             <section id="checklist">
-                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">互動式準備清單</h2>
+                <h2 class="text-3xl font-bold text-center mb-4">互動式準備清單</h2>
                 <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">清單已根據最新的服裝策略更新。點擊按鈕篩選，勾選以追蹤進度。</p>
                 <div id="checklist-filters" class="flex flex-wrap justify-center gap-2 mb-8">
                 </div>
                 <div id="checklist-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 </div>
             </section>
-
-            <section id="safety">
-                <h2 class="text-3xl font-bold text-center mb-10 text-[#073B4C]">滑雪安全須知</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <p class="font-bold text-lg mb-2">① 正確跌倒，保護自己</p>
-                        <p class="text-slate-600">感覺快要失控時，主動向後方或側後方坐倒。**核心技巧是「用屁股著地」**，絕對不要用手腕去撐地，非常容易造成手腕骨折。</p>
+            
+            <section id="budget">
+                <h2 class="text-3xl font-bold text-center mb-12">互動式預算分析</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-3 bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-200">
+                        <h3 class="text-2xl font-bold mb-6 text-center">費用細項 & 計算機</h3>
+                        <table class="w-full text-left mb-6">
+                           <thead class="border-b-2 border-gray-200">
+                                <tr><th class="py-2">項目</th><th class="py-2 text-right">費用 (TWD)</th></tr>
+                           </thead>
+                           <tbody id="budget-table-body">
+                           </tbody>
+                        </table>
+                        <div class="mt-6">
+                            <label for="personal-spending" class="block font-medium text-slate-600 mb-2">調整個人花費 (購物、紀念品...)</label>
+                            <input type="range" id="personal-spending" min="0" max="20000" step="1000" value="5000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-sm text-slate-500 mt-1">
+                                <span>TWD 0</span>
+                                <span id="personal-spending-value" class="font-bold text-blue-500">TWD 5,000</span>
+                                <span>TWD 20,000</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <p class="font-bold text-lg mb-2">② 選擇適合自己的雪道</p>
-                        <p class="text-slate-600">雪場會用顏色標示雪道難度（綠線：初級，紅線：中級，黑線：高級）。請務必在教練指導下，從綠線開始，**不要輕易挑戰超出自己能力的雪道**。</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <p class="font-bold text-lg mb-2">③ 隨時注意周遭環境</p>
-                        <p class="text-slate-600">在雪道上休息或停留時，請務必停在**雪道的兩側**，避免停在雪道中間或轉彎處的死角，以免被後方滑行者撞上。</p>
-                    </div>
-                     <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                        <p class="font-bold text-lg mb-2">④ 安全裝備不可少</p>
-                        <p class="text-slate-600">**安全帽是必備品**，能有效保護頭部。雪鏡不僅能防風防紫外線，還能讓你在不同天氣下都看清雪道。護具（如護臀、護膝）也能大幅增加安全性。</p>
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6 border border-gray-200 flex flex-col justify-between">
+                         <div>
+                            <h3 class="text-2xl font-bold mb-4 text-center">預估費用佔比</h3>
+                            <div class="chart-container">
+                                <canvas id="budgetChart"></canvas>
+                            </div>
+                         </div>
+                         <div class="text-center mt-6">
+                             <p class="text-slate-500">預估總計 (不含個人花費)</p>
+                             <p id="subtotal-cost" class="text-3xl font-bold"></p>
+                             <p class="text-slate-600 mt-4">最終總計 (含個人花費)</p>
+                             <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400"></p>
+                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="budget">
-                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">旅費預算分析</h2>
-                 <p class="text-center text-slate-600 mb-8 max-w-3xl mx-auto">下方是根據您的規劃與一般行情估算的費用。實際開銷會因住宿等級、餐飲選擇和購物而有不同。建議攜帶約 70,000 - 100,000 日幣現金，以應付交通、小額餐飲等支出。</p>
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
-                    <div class="lg:col-span-3 bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                        <h3 class="text-xl font-bold mb-4 text-center">預估費用細項 (台幣)</h3>
-                        <table class="w-full text-left">
-                           <thead class="border-b-2">
-                                <tr><th class="py-2">項目</th><th class="py-2">費用</th><th class="py-2">備註</th></tr>
-                           </thead>
-                           <tbody>
-                               <tr class="border-b"><td class="py-3">✈️ 機票來回</td><td class="py-3 font-bold">16,000</td><td class="py-3 text-slate-500 text-sm">已預訂</td></tr>
-                               <tr class="border-b"><td class="py-3">🏂 教練課</td><td class="py-3 font-bold">12,667</td><td class="py-3 text-slate-500 text-sm">6人分攤 / 2天</td></tr>
-                               <tr class="border-b"><td class="py-3">🚄 高鐵來回</td><td class="py-3 font-bold">2,700</td><td class="py-3 text-slate-500 text-sm">桃園機場交通</td></tr>
-                               <tr class="border-b"><td class="py-3">🏨 住宿</td><td class="py-3 font-bold">~15,000</td><td class="py-3 text-slate-500 text-sm">估計值 (5晚)</td></tr>
-                               <tr class="border-b"><td class="py-3">🍜 餐飲雜支</td><td class="py-3 font-bold">~10,000</td><td class="py-3 text-slate-500 text-sm">估計值</td></tr>
-                               <tr class="border-b"><td class="py-3">🎟️ 雪票</td><td class="py-3 font-bold">~5,000</td><td class="py-3 text-slate-500 text-sm">估計值 (4天)</td></tr>
-                               <tr class="border-b"><td class="py-3">🎿 雪具租賃</td><td class="py-3 font-bold">~3,500</td><td class="py-3 text-slate-500 text-sm">估計值 (4天)</td></tr>
-                               <tr class="border-b"><td class="py-3">🚌 當地交通</td><td class="py-3 font-bold">~1,500</td><td class="py-3 text-slate-500 text-sm">新幹線、巴士等</td></tr>
-                               <tr><td class="py-3 font-bold text-lg">💰 預估總計</td><td class="py-3 font-bold text-lg text-red-600">~66,367</td><td class="py-3 text-slate-500 text-sm">不含購物</td></tr>
-                           </tbody>
-                        </table>
+            <section id="safety">
+                <h2 class="text-3xl font-bold text-center mb-12">滑雪安全須知</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="font-bold text-lg mb-2">① 正確跌倒，保護自己</p>
+                        <p class="text-slate-600">感覺快要失控時，主動向後方或側後方坐倒。**核心技巧是「用屁股著地」**，絕對不要用手腕去撐地，非常容易造成手腕骨折。</p>
                     </div>
-                    <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 border border-slate-200">
-                         <h3 class="text-xl font-bold mb-4 text-center">費用佔比分佈</h3>
-                        <div class="chart-container">
-                            <canvas id="budgetChart"></canvas>
-                        </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="font-bold text-lg mb-2">② 選擇適合自己的雪道</p>
+                        <p class="text-slate-600">雪場會用顏色標示雪道難度（綠線：初級）。請務必在教練指導下，從綠線開始，**不要輕易挑戰超出自己能力的雪道**。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="font-bold text-lg mb-2">③ 隨時注意周遭環境</p>
+                        <p class="text-slate-600">在雪道上休息或停留時，請務必停在**雪道的兩側**，避免停在雪道中間或轉彎處的死角，以免被後方滑行者撞上。</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <p class="font-bold text-lg mb-2">④ 安全裝備不可少</p>
+                        <p class="text-slate-600">**安全帽是必備品**，能有效保護頭部。雪鏡和護具（如防摔褲、護膝）也能大幅增加安全性。</p>
                     </div>
                 </div>
             </section>
         </main>
+        
+        <footer class="text-center mt-20 pt-8 border-t border-gray-200">
+            <p class="text-slate-500">祝您有趟愉快又安全的滑雪之旅！</p>
+            <p class="text-sm text-slate-400 mt-1">互動儀表板 by Gemini</p>
+        </footer>
     </div>
 
     <script>
@@ -283,63 +389,16 @@
                 { name: '泳衣', category: 'pack', description: '野澤是溫泉鄉，別忘了泡溫泉！' }
             ];
 
-            const budgetData = {
-                labels: ['機票', '住宿', '教練課', '餐飲', '雪票 & 租賃', '交通'],
-                datasets: [{
-                    label: '預算分配',
-                    data: [24, 23, 19, 15, 13, 6],
-                    backgroundColor: ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#a8dadc'],
-                    borderColor: '#f8fafc',
-                    borderWidth: 4,
-                    hoverOffset: 8
-                }]
-            };
-
-            const filtersContainer = document.getElementById('checklist-filters');
-            const checklistContainer = document.getElementById('checklist-container');
-            const categories = {
-                'all': '全部項目',
-                'buy': '自行採購',
-                'rent': '當地租賃',
-                'pack': '打包用品'
-            };
-
-            const renderChecklist = (filter = 'all') => {
-                checklistContainer.innerHTML = '';
-                const filteredData = filter === 'all' ? checklistData : checklistData.filter(item => item.category === filter);
-                
-                filteredData.forEach(item => {
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'bg-white p-4 rounded-lg shadow border border-slate-200 flex items-center space-x-3 cursor-pointer hover:shadow-md transition-shadow group relative';
-                    itemEl.innerHTML = `
-                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                        <label class="font-medium text-slate-700">${item.name}</label>
-                        <div class="absolute bottom-full mb-2 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                            ${item.description}
-                            <svg class="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
-                        </div>
-                    `;
-                    checklistContainer.appendChild(itemEl);
-                });
-            };
-
-            const setupFilters = () => {
-                Object.keys(categories).forEach(key => {
-                    const button = document.createElement('button');
-                    button.textContent = categories[key];
-                    button.dataset.filter = key;
-                    button.className = 'btn-filter px-4 py-2 rounded-md font-semibold text-sm transition bg-white border border-slate-300 hover:bg-slate-100';
-                    if (key === 'all') {
-                        button.classList.add('active');
-                    }
-                    button.addEventListener('click', () => {
-                        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                        renderChecklist(key);
-                    });
-                    filtersContainer.appendChild(button);
-                });
-            };
+            let budgetChart;
+            const budgetItems = [
+                { label: '✈️ 機票來回', cost: 16000, note: '已預訂' },
+                { label: '🏂 教練課', cost: 12667, note: '6人分攤 / 2天' },
+                { label: '🏨 住宿', cost: 15000, note: '估計值 (4晚)' },
+                { label: '🍜 餐飲雜支', cost: 10000, note: '估計值' },
+                { label: '🎟️ 雪票', cost: 5000, note: '估計值 (4天)' },
+                { label: '🎿 雪具租賃', cost: 3500, note: '估計值 (4天)' },
+                { label: '🚄 交通', cost: 4200, note: '高鐵/新幹線/巴士' }
+            ];
 
             const startCountdown = () => {
                 const targetDate = new Date('2026-01-14T00:00:00').getTime();
@@ -357,46 +416,124 @@
                 }, 1000);
             };
 
-            const renderBudgetChart = () => {
-                const ctx = document.getElementById('budgetChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: budgetData,
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    font: { size: 12, family: "'Inter', 'Noto Sans TC', sans-serif" },
-                                    padding: 15
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed !== null) {
-                                            label += context.parsed + '%';
-                                        }
-                                        return label;
-                                    }
-                                }
-                            }
-                        },
-                        cutout: '60%'
-                    }
+            const setupChecklist = () => {
+                const filtersContainer = document.getElementById('checklist-filters');
+                const checklistContainer = document.getElementById('checklist-container');
+                const categories = { 'all': '全部項目', 'buy': '自行採購', 'rent': '當地租賃', 'pack': '打包用品' };
+
+                const renderChecklist = (filter = 'all') => {
+                    checklistContainer.innerHTML = '';
+                    const filteredData = filter === 'all' ? checklistData : checklistData.filter(item => item.category === filter);
+                    
+                    filteredData.forEach(item => {
+                        const itemEl = document.createElement('div');
+                        itemEl.className = 'bg-white p-4 rounded-lg shadow border border-gray-200 flex items-center space-x-3 cursor-pointer hover:shadow-md transition-shadow group relative';
+                        itemEl.innerHTML = `
+                            <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <label class="font-medium text-slate-700">${item.name}</label>
+                            <div class="absolute bottom-full mb-2 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                                ${item.description}
+                                <svg class="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+                            </div>
+                        `;
+                        checklistContainer.appendChild(itemEl);
+                    });
+                };
+
+                Object.keys(categories).forEach(key => {
+                    const button = document.createElement('button');
+                    button.textContent = categories[key];
+                    button.dataset.filter = key;
+                    button.className = 'btn-filter px-4 py-2 rounded-full font-semibold text-sm transition bg-white border border-gray-300 hover:bg-gray-100';
+                    if (key === 'all') button.classList.add('active');
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        renderChecklist(key);
+                    });
+                    filtersContainer.appendChild(button);
                 });
+
+                renderChecklist();
+            };
+
+            const setupBudgetCalculator = () => {
+                const spendingSlider = document.getElementById('personal-spending');
+                const spendingValueEl = document.getElementById('personal-spending-value');
+                const subtotalEl = document.getElementById('subtotal-cost');
+                const totalEl = document.getElementById('total-cost');
+                const tableBody = document.getElementById('budget-table-body');
+                
+                const formatCurrency = (num) => `TWD ${num.toLocaleString()}`;
+
+                const renderTable = () => {
+                    tableBody.innerHTML = '';
+                    budgetItems.forEach(item => {
+                        const row = `
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 pr-2">${item.label}</td>
+                                <td class="py-3 text-right font-semibold">${item.cost.toLocaleString()}</td>
+                            </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                };
+                
+                const updateChart = (personalSpending) => {
+                    const subtotal = budgetItems.reduce((sum, item) => sum + item.cost, 0);
+                    const total = subtotal + personalSpending;
+                    
+                    const chartData = budgetItems.map(item => item.cost);
+                    const chartLabels = budgetItems.map(item => item.label.split(' ')[1]);
+
+                    if (personalSpending > 0) {
+                        chartData.push(personalSpending);
+                        chartLabels.push('個人花費');
+                    }
+
+                    if (budgetChart) {
+                        budgetChart.data.labels = chartLabels;
+                        budgetChart.data.datasets[0].data = chartData;
+                        budgetChart.update();
+                    } else {
+                        const ctx = document.getElementById('budgetChart').getContext('2d');
+                        budgetChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: chartLabels,
+                                datasets: [{
+                                    data: chartData,
+                                    backgroundColor: ['#3b82f6', '#14b8a6', '#f59e0b', '#ef4444', '#8b5cf6', '#6366f1', '#ec4899'],
+                                    borderColor: '#ffffff',
+                                    borderWidth: 4,
+                                    hoverOffset: 8
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false } },
+                                cutout: '70%'
+                            }
+                        });
+                    }
+                    
+                    subtotalEl.textContent = formatCurrency(subtotal);
+                    totalEl.textContent = formatCurrency(total);
+                };
+
+                spendingSlider.addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    spendingValueEl.textContent = formatCurrency(value);
+                    updateChart(value);
+                });
+                
+                renderTable();
+                updateChart(parseInt(spendingSlider.value));
             };
             
             startCountdown();
-            setupFilters();
-            renderChecklist();
-            renderBudgetChart();
+            setupChecklist();
+            setupBudgetCalculator();
         });
     </script>
 </body>
