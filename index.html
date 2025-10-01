@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>野澤溫泉滑雪之旅 | Nozawa Onsen Trip Planner</title>
+    <title>野澤滑雪互動準備儀表板 | Nozawa Onsen Trip Planner</title>
     <!-- Chosen Palette: Nozawa Winter -->
     <!-- Application Structure Plan: Inspired by the provided reference, the structure is a complete redesign into a modern, card-based, single-page application. The key change is the introduction of a more dynamic grid layout and dedicated sections for a clearer narrative flow, from high-level planning (Roadmap, Itinerary) to actionable details (Checklist, Budget). A new 'Itinerary' section was added to provide a chronological story of the trip. The most significant interactive enhancement is the dynamic budget calculator with a slider, allowing real-time 'what-if' analysis of personal spending. This structure was chosen to transform the tool from a static checklist into an engaging, visually-driven planning experience that encourages exploration and personalization. -->
     <!-- Visualization & Content Choices: 1. Countdown/Stats (Inform): Redesigned as prominent hero stats with icons. 2. Itinerary (Organize): A new visual timeline component using HTML/CSS to clearly show the day-by-day plan. 3. Interactive Checklist (Interact): UI refreshed with improved styling for buttons and items to match the new theme. 4. Dynamic Budget Calculator (Interact/Analyze): The static budget table is now interactive. A range slider allows users to adjust personal spending, which dynamically updates the total cost and the Chart.js doughnut chart via Vanilla JS. This provides immediate visual feedback on financial planning. Justification: These choices elevate the user experience by making information more digestible (icons, cards), providing a clearer trip narrative (itinerary), and adding powerful, personalized interactivity (budget calculator). -->
@@ -136,12 +136,12 @@
             </div>
         </nav>
         
-        <main class="space-y-8">
+        <main class="space-y-24">
 
             <section id="itinerary">
-                <h2 class="text-3xl font-bold text-center mb-12">行程總覽</h2>
+                <h2 class="text-3xl font-bold text-center mb-12 pb-4 border-b-2 border-gray-200">行程總覽</h2>
                 <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-yellow-400 pl-10">
-                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                         <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
                         <h3 class="font-bold text-lg text-[var(--accent-secondary)]">移動與抵達</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 14 (三)</p>
@@ -153,7 +153,7 @@
                             <li>在溫泉街悠閒漫步，熟悉環境</li>
                         </ul>
                     </div>
-                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                         <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
                         <h3 class="font-bold text-lg text-[var(--accent-secondary)]">全日滑雪課程 & 道祖神祭</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 15 (四)</p>
@@ -167,7 +167,7 @@
                             <p class="text-xs text-indigo-600">雪衣、雪褲、雪板、雪鞋、安全帽、雪鏡、手套、防摔褲、護膝</p>
                         </div>
                     </div>
-                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                         <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
                         <h3 class="font-bold text-lg text-[var(--accent-secondary)]">全日滑雪課程 & 溫泉體驗</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 16 (五)</p>
@@ -177,7 +177,7 @@
                              <li>體驗「外湯巡禮」，感受村民守護的溫泉文化，開始<span class="font-bold">搜集印章</span>換獎品！</li>
                          </ul>
                     </div>
-                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                         <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
                         <h3 class="font-bold text-lg text-[var(--accent-secondary)]">自主練習 & 自由探索</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 17 (六)</p>
@@ -188,7 +188,7 @@
                             <li>品嚐溫泉街小吃：冰淇淋、野澤菜包。</li>
                         </ul>
                     </div>
-                     <div class="iti-item relative bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                     <div class="iti-item relative bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                         <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
                         <h3 class="font-bold text-lg text-[var(--accent-secondary)]">返程</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 18 (日)</p>
@@ -204,7 +204,7 @@
             <section id="village-guide">
                 <details>
                     <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">溫泉村莊探索 
+                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">溫泉村莊探索 
                             <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </h2>
                     </summary>
@@ -266,7 +266,7 @@
             <section id="ski-guide">
                  <details>
                     <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">滑雪完全指南
+                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">滑雪完全指南
                             <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </h2>
                     </summary>
@@ -366,7 +366,7 @@
             <section id="food-guide">
                 <details>
                     <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">美食推薦
+                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">美食推薦
                             <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </h2>
                     </summary>
@@ -380,15 +380,15 @@
                             <div class="mb-8">
                                 <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">住宿附近</h4>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">焼肉 やま冨士</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">肉舖老闆開的燒肉店，便宜好吃但煙霧繚繞。<br><span class="text-indigo-600">電話: +81 269-85-2121</span><br><span class="text-red-500 font-semibold">(建議10人務必預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">お好み焼き 一ちゃん</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">住宿附近的大阪燒，有搭配部分小點心。<br><span class="text-indigo-600">電話: +81 269-85-3230</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
                                 </div>
                             </div>
@@ -396,40 +396,40 @@
                             <div>
                                  <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">溫泉街中心</h4>
                                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">大門 (Daimon)</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">份量不錯的豬排飯、餃子。<br><span class="text-indigo-600">電話: +81 269-85-2570</span><br><span class="text-red-500 font-semibold">(不接受預約，10人需有排隊或分開坐的準備)</span></p>
-                                        <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">ちゃんこ玉屋</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">不起眼的相撲鍋與壽喜燒火鍋店。<br><span class="text-indigo-600">電話: +81 269-85-2435</span><br><span class="text-red-500 font-semibold">(建議10人務必預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">ばあどこ (Banri)</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">受外國人歡迎，店員會講中文，似乎有素火鍋。<br><span class="text-indigo-600">電話: +81 269-85-2333</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">大まるそば店</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">蕎麥麵店，冬季似乎有熱湯選項。<br><span class="text-indigo-600">電話: +81 269-85-2038</span><br><span class="text-red-500 font-semibold">(建議10人預約詢問)</span></p>
-                                        <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">三吉 (San-kichi)</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">關東煮，特色是有賣馬肉刺身。<br><span class="text-indigo-600">電話: +81 269-85-3933</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">そば処 大茂ん</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">可預約牛肉壽喜燒的蕎麥麵店。<br><span class="text-indigo-600">電話: +81 269-85-2032</span><br><span class="text-red-500 font-semibold">(可預約，10人建議務必預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
-                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 flex flex-col">
+                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                         <p class="font-bold">Playce Nozawa</p>
                                         <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">同時賣披薩、拉麵，晚上是居酒屋。<br><span class="text-indigo-600">電話: +81 269-67-0407</span><br><span class="text-red-500 font-semibold">(建議10人預約詢問)</span></p>
-                                        <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                        <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                     </div>
                                 </div>
                             </div>
@@ -442,7 +442,7 @@
                 <section id="roadmap">
                     <details>
                         <summary>
-                            <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">準備時程計畫
+                            <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">準備時程計畫
                                 <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </h2>
                         </summary>
@@ -452,7 +452,7 @@
                                 <p class="font-semibold text-slate-500 text-sm mb-4">現在 ~ 2025/10月底</p>
                                 <ul class="space-y-2 text-slate-600">
                                     <li>🔴 <span class="font-medium">換發護照：</span>最優先！</li>
-                                    <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-indigo-500 hover:underline text-sm">[樂桃]</a></li>
+                                    <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm">[樂桃]</a></li>
                                     <li>🔴 <span class="font-medium">申請休假</span></li>
                                 </ul>
                             </div>
@@ -461,7 +461,7 @@
                                 <p class="font-semibold text-slate-500 text-sm mb-4">2025/11 ~ 12月</p>
                                 <ul class="space-y-2 text-slate-600">
                                     <li>🟡 <span class="font-medium">採購個人裝備</span></li>
-                                    <li>🟡 <span class="font-medium">購買網卡</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-indigo-500 hover:underline text-sm">[eSIM參考]</a></li>
+                                    <li>🟡 <span class="font-medium">購買網卡</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm">[eSIM參考]</a></li>
                                     <li>🟡 <span class="font-medium">購買保險</span></li>
                                     <li>🟡 <span class="font-medium">預訂高鐵</span></li>
                                     <li>🟡 <span class="font-medium">兌換日幣</span></li>
@@ -483,7 +483,7 @@
                 <section id="checklist">
                     <details>
                         <summary>
-                             <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">互動式準備清單
+                             <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">互動式準備清單
                                 <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </h2>
                         </summary>
@@ -500,7 +500,7 @@
                 <section id="budget">
                     <details>
                          <summary>
-                             <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">互動式預算分析
+                             <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">互動式預算分析
                                 <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </h2>
                         </summary>
@@ -554,7 +554,7 @@
 
         <footer class="text-center mt-12 pt-8 border-t border-gray-200">
             <p class="text-slate-500">祝您有趟愉快又安全的滑雪之旅！</p>
-            <p class="text-sm text-slate-400 mt-1">最後更新：2025/10/01</p>
+            <p id="last-updated" class="text-sm text-slate-400 mt-1">最後更新：</p>
         </footer>
     </div>
 
@@ -692,7 +692,7 @@
                                 labels: chartLabels,
                                 datasets: [{
                                     data: chartData,
-                                    backgroundColor: ['#1a365d', '#a97c50', '#4a5568', '#f6ad55', '#81e6d9', '#f6e05e', '#a0aec0'],
+                                    backgroundColor: ['#1a365d', '#3e5a80', '#6f8695', '#a97c50', '#c29d78', '#d3b89e', '#a0aec0'],
                                     borderColor: '#ffffff',
                                     borderWidth: 4,
                                     hoverOffset: 8
@@ -751,11 +751,20 @@
                     toggleBtnBottom.addEventListener('click', performToggle);
                 }
             };
+            
+            const setLastUpdated = () => {
+                const date = new Date();
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const day = date.getDate().toString().padStart(2, '0');
+                document.getElementById('last-updated').textContent = `最後更新：${year}/${month}/${day}`;
+            }
 
             startCountdown();
             setupChecklist();
             setupBudgetCalculator();
             setupViewToggle();
+            setLastUpdated();
         });
     </script>
 </body>
