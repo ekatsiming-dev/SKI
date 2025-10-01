@@ -97,7 +97,6 @@
             <div class="absolute inset-0 bg-black/50"></div>
             <div class="relative z-10 px-4">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white hero-text-shadow">野澤溫泉滑雪之旅</h1>
-               
             </div>
         </header>
 
@@ -125,16 +124,24 @@
             </div>
         </section>
 
-        <nav class="sticky top-4 glass-nav z-20 py-3 mb-20 rounded-full shadow-md border border-gray-200">
+        <nav class="sticky top-4 glass-nav z-20 py-3 mb-12 rounded-full shadow-md border border-gray-200">
             <div class="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-10 text-sm sm:text-base md:text-lg font-semibold">
                 <a href="#itinerary" class="nav-link">行程總覽</a>
                 <a href="#lodging" class="nav-link">住宿美食</a>
                 <a href="#roadmap" class="nav-link">準備計畫</a>
-                <a href="#checklist" class="nav-link">互動清單</a>
-                <a href="#budget" class="nav-link">預算分析</a>
+                <a href="#checklist" class="nav-link personal-nav-link hidden">互動清單</a>
+                <a href="#budget" class="nav-link personal-nav-link hidden">預算分析</a>
                 <a href="#safety" class="nav-link">安全須知</a>
             </div>
         </nav>
+        
+        <div class="text-center mb-20">
+            <button id="toggle-personal-sections" class="px-6 py-2 bg-[var(--accent-primary)] text-white font-semibold rounded-full hover:bg-opacity-80 transition-colors shadow-md flex items-center gap-2 mx-auto">
+                <svg id="toggle-icon-show" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                <svg id="toggle-icon-hide" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274-4.057 5.064 7 9.542 7 .847 0 1.673.124 2.458.35M18.828 4.172a9.96 9.96 0 013.714 7.828 10.02 10.02 0 01-3.714 7.828M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l22 22"></path></svg>
+                <span id="toggle-text">顯示個人化工具</span>
+            </button>
+        </div>
 
         <main class="space-y-20">
 
@@ -284,13 +291,13 @@
                         <ul class="space-y-2 text-slate-600">
                             <li>🔴 <span class="font-medium">換發護照：</span>最優先！</li>
                             <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-indigo-500 hover:underline text-sm">[樂桃]</a></li>
+                            <li>🔴 <span class="font-medium">申請休假</span></li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
                         <h3 class="text-xl font-bold text-[var(--accent-primary)] mb-3">第二階段：細節規劃</h3>
                         <p class="font-semibold text-slate-500 text-sm mb-4">2025/11 ~ 12月</p>
                         <ul class="space-y-2 text-slate-600">
-                            <li>🟡 <span class="font-medium">申請休假</span></li>
                             <li>🟡 <span class="font-medium">採購個人裝備</span></li>
                             <li>🟡 <span class="font-medium">購買網卡/保險</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-indigo-500 hover:underline text-sm">[eSIM參考]</a></li>
                             <li>🟡 <span class="font-medium">預訂高鐵/兌換日幣</span></li>
@@ -308,53 +315,55 @@
                 </div>
             </section>
             
-            <section id="checklist">
-                <h2 class="text-3xl font-bold text-center mb-4">互動式準備清單</h2>
-                <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">此清單專注於您需自行採購與打包的物品。當地租賃裝備請參考行程總覽。</p>
-                <div id="checklist-filters" class="flex flex-wrap justify-center gap-2 mb-8">
-                </div>
-                <div id="checklist-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                </div>
-            </section>
-            
-            <section id="budget">
-                <h2 class="text-3xl font-bold text-center mb-12">互動式預算分析</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                    <div class="lg:col-span-3 bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-200">
-                        <h3 class="text-2xl font-bold mb-6 text-center">費用細項 & 計算機</h3>
-                        <table class="w-full text-left mb-6">
-                           <thead class="border-b-2 border-gray-200">
-                                <tr><th class="py-2">項目</th><th class="py-2 text-right">費用 (TWD)</th></tr>
-                           </thead>
-                           <tbody id="budget-table-body">
-                           </tbody>
-                        </table>
-                        <div class="mt-6">
-                            <label for="personal-spending" class="block font-medium text-slate-600 mb-2">調整個人花費 (購物、紀念品...)</label>
-                            <input type="range" id="personal-spending" min="0" max="20000" step="1000" value="5000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
-                            <div class="flex justify-between text-sm text-slate-500 mt-1">
-                                <span>TWD 0</span>
-                                <span id="personal-spending-value" class="font-bold text-[var(--accent-primary)]">TWD 5,000</span>
-                                <span>TWD 20,000</span>
+            <div id="personal-sections" class="hidden space-y-20">
+                <section id="checklist">
+                    <h2 class="text-3xl font-bold text-center mb-4">互動式準備清單</h2>
+                    <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">此清單專注於您需自行採購與打包的物品。當地租賃裝備請參考行程總覽。</p>
+                    <div id="checklist-filters" class="flex flex-wrap justify-center gap-2 mb-8">
+                    </div>
+                    <div id="checklist-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    </div>
+                </section>
+                
+                <section id="budget">
+                    <h2 class="text-3xl font-bold text-center mb-12">互動式預算分析</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                        <div class="lg:col-span-3 bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-200">
+                            <h3 class="text-2xl font-bold mb-6 text-center">費用細項 & 計算機</h3>
+                            <table class="w-full text-left mb-6">
+                               <thead class="border-b-2 border-gray-200">
+                                    <tr><th class="py-2">項目</th><th class="py-2 text-right">費用 (TWD)</th></tr>
+                               </thead>
+                               <tbody id="budget-table-body">
+                               </tbody>
+                            </table>
+                            <div class="mt-6">
+                                <label for="personal-spending" class="block font-medium text-slate-600 mb-2">調整個人花費 (購物、紀念品...)</label>
+                                <input type="range" id="personal-spending" min="0" max="20000" step="1000" value="5000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-sm text-slate-500 mt-1">
+                                    <span>TWD 0</span>
+                                    <span id="personal-spending-value" class="font-bold text-[var(--accent-primary)]">TWD 5,000</span>
+                                    <span>TWD 20,000</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6 border border-gray-200 flex flex-col justify-between">
+                             <div>
+                                <h3 class="text-2xl font-bold mb-4 text-center">預估費用佔比</h3>
+                                <div class="chart-container">
+                                    <canvas id="budgetChart"></canvas>
+                                </div>
+                             </div>
+                             <div class="text-center mt-6">
+                                 <p class="text-slate-500">預估總計 (不含個人花費)</p>
+                                 <p id="subtotal-cost" class="text-3xl font-bold"></p>
+                                 <p class="text-slate-600 mt-4">最終總計 (含個人花費)</p>
+                                 <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-400"></p>
+                             </div>
+                        </div>
                     </div>
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6 border border-gray-200 flex flex-col justify-between">
-                         <div>
-                            <h3 class="text-2xl font-bold mb-4 text-center">預估費用佔比</h3>
-                            <div class="chart-container">
-                                <canvas id="budgetChart"></canvas>
-                            </div>
-                         </div>
-                         <div class="text-center mt-6">
-                             <p class="text-slate-500">預估總計 (不含個人花費)</p>
-                             <p id="subtotal-cost" class="text-3xl font-bold"></p>
-                             <p class="text-slate-600 mt-4">最終總計 (含個人花費)</p>
-                             <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-400"></p>
-                         </div>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
 
             <section id="safety">
                 <h2 class="text-3xl font-bold text-center mb-12">滑雪安全須知</h2>
@@ -548,9 +557,35 @@
                 updateChart(parseInt(spendingSlider.value));
             };
             
+            const setupViewToggle = () => {
+                const toggleBtn = document.getElementById('toggle-personal-sections');
+                const personalSections = document.getElementById('personal-sections');
+                const personalNavLinks = document.querySelectorAll('.personal-nav-link');
+                const toggleText = document.getElementById('toggle-text');
+                const iconShow = document.getElementById('toggle-icon-show');
+                const iconHide = document.getElementById('toggle-icon-hide');
+
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = personalSections.classList.contains('hidden');
+                    personalSections.classList.toggle('hidden');
+                    personalNavLinks.forEach(link => link.classList.toggle('hidden'));
+                    
+                    if (isHidden) {
+                        toggleText.textContent = '隱藏個人化工具';
+                        iconShow.classList.add('hidden');
+                        iconHide.classList.remove('hidden');
+                    } else {
+                        toggleText.textContent = '顯示個人化工具';
+                        iconShow.classList.remove('hidden');
+                        iconHide.classList.add('hidden');
+                    }
+                });
+            };
+
             startCountdown();
             setupChecklist();
             setupBudgetCalculator();
+            setupViewToggle();
         });
     </script>
 </body>
