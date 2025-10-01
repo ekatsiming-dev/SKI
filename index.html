@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>野澤溫泉滑雪之旅 | Nozawa Onsen Trip Planner</title>
-    <!-- Chosen Palette: Nozawa Winter -->
-    <!-- Application Structure Plan: Inspired by the provided reference, the structure is a complete redesign into a modern, card-based, single-page application. The key change is the introduction of a more dynamic grid layout and dedicated sections for a clearer narrative flow, from high-level planning (Roadmap, Itinerary) to actionable details (Checklist, Budget). A new 'Itinerary' section was added to provide a chronological story of the trip. The most significant interactive enhancement is the dynamic budget calculator with a slider, allowing real-time 'what-if' analysis of personal spending. This structure was chosen to transform the tool from a static checklist into an engaging, visually-driven planning experience that encourages exploration and personalization. -->
-    <!-- Visualization & Content Choices: 1. Countdown/Stats (Inform): Redesigned as prominent hero stats with icons. 2. Itinerary (Organize): A new visual timeline component using HTML/CSS to clearly show the day-by-day plan. 3. Interactive Checklist (Interact): UI refreshed with improved styling for buttons and items to match the new theme. 4. Dynamic Budget Calculator (Interact/Analyze): The static budget table is now interactive. A range slider allows users to adjust personal spending, which dynamically updates the total cost and the Chart.js doughnut chart via Vanilla JS. This provides immediate visual feedback on financial planning. Justification: These choices elevate the user experience by making information more digestible (icons, cards), providing a clearer trip narrative (itinerary), and adding powerful, personalized interactivity (budget calculator). -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -147,8 +143,8 @@
                         <h3 class="font-bold text-lg text-[var(--accent-secondary)]">移動與抵達</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 14 (三)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
-                            <li>搭乘 MM620 (02:20) 前往東京成田機場 (NRT)</li>
-                            <li>轉乘新幹線 (13:30) 前往飯山站</li>
+                            <li><strong style="color: var(--accent-secondary);">02:20</strong> 搭乘 MM620 前往東京成田機場 (NRT)</li>
+                            <li><strong style="color: var(--accent-secondary);">13:30</strong> 轉乘新幹線前往飯山站</li>
                             <li>抵達野澤溫泉，至 <span class="font-bold">Yamasanso</span> Check-in</li>
                             <li>晚餐推薦：<span class="font-bold">お好み焼き 一ちゃん</span> (住宿附近)</li>
                             <li>在溫泉街悠閒漫步，熟悉環境</li>
@@ -161,11 +157,23 @@
                         <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
                             <li>全日6小時滑雪技巧學習</li>
                             <li>晚餐推薦：<span class="font-bold">焼肉 やま冨士</span> (住宿附近燒肉)</li>
-                            <li>晚上19:00在<span class="font-bold">道祖神場</span>參加日本三大火祭之一的「道祖神祭」，體驗獨特的火光與祈福儀式。</li>
+                            <li><strong style="color: var(--accent-secondary);">19:00</strong> 在<span class="font-bold">道祖神場</span>參加日本三大火祭之一的「道祖神祭」，體驗獨特的火光與祈福儀式。</li>
                         </ul>
                         <div class="mt-4 bg-indigo-50 border border-indigo-200 p-3 rounded-md">
                             <h4 class="font-semibold text-sm text-indigo-800">本日租賃裝備提醒</h4>
                             <p class="text-xs text-indigo-600">雪衣、雪褲、雪板、雪鞋、安全帽、雪鏡、手套、防摔褲、護膝</p>
+                        </div>
+                        <div class="mt-4">
+                            <details class="bg-gray-50 rounded-md border border-gray-200">
+                                <summary class="p-3 font-semibold text-sm text-slate-700 flex justify-between items-center">
+                                    <span>深入了解：道祖神祭</span>
+                                    <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </summary>
+                                <div class="p-3 border-t border-gray-200 text-xs text-slate-600 space-y-2">
+                                    <p>「道祖神祭」是日本國家級重要無形民俗文化遺產，與「青森睡魔祭」、「秋田竿燈祭」並列為日本三大火祭。祭典旨在為村莊驅除厄運、祈求豐收、孩童健康成長及良緣。</p>
+                                    <p>核心儀式圍繞一座巨大的木造社殿展開。村裡的男性（特別是25歲和42歲的「厄年」男性）扮演關鍵角色，他們需要抵禦其他村民手持火把的激烈進攻，保護社殿不被燒毀。這場充滿張力的攻防戰，是祭典最高潮的部分。最終，社殿會在儀式結束時被點燃，熊熊火焰在雪地中升起，場面極為壯觀。</p>
+                                </div>
+                            </details>
                         </div>
                     </div>
                      <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
@@ -196,7 +204,7 @@
                          <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
                              <li>上午最後巡禮，購買伴手禮</li>
                              <li>整理行囊，準備前往飯山站</li>
-                             <li>搭乘 MM625 (16:35) 返回台灣桃園機場 (TPE)</li>
+                             <li><strong style="color: var(--accent-secondary);">16:35</strong> 搭乘 MM625 返回台灣桃園機場 (TPE)</li>
                          </ul>
                     </div>
                 </div>
@@ -814,6 +822,20 @@
                 const day = date.getDate().toString().padStart(2, '0');
                 document.getElementById('last-updated').textContent = `最後更新：${year}/${month}/${day}`;
             }
+
+            // Simple logic for the details/summary accordion arrow
+            document.querySelectorAll('details').forEach((detail) => {
+                detail.addEventListener('toggle', (event) => {
+                    const arrow = detail.querySelector('summary svg');
+                    if (arrow) {
+                        if (detail.open) {
+                            arrow.style.transform = 'rotate(180deg)';
+                        } else {
+                            arrow.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+            });
 
             startCountdown();
             setupChecklist();
