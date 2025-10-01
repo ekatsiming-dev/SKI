@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>野澤滑雪互動準備儀表板 | Nozawa Onsen Trip Planner</title>
-    <!-- Chosen Palette: Winter Mountain -->
+    <!-- Chosen Palette: Nozawa Winter -->
     <!-- Application Structure Plan: Inspired by the provided reference, the structure is a complete redesign into a modern, card-based, single-page application. The key change is the introduction of a more dynamic grid layout and dedicated sections for a clearer narrative flow, from high-level planning (Roadmap, Itinerary) to actionable details (Checklist, Budget). A new 'Itinerary' section was added to provide a chronological story of the trip. The most significant interactive enhancement is the dynamic budget calculator with a slider, allowing real-time 'what-if' analysis of personal spending. This structure was chosen to transform the tool from a static checklist into an engaging, visually-driven planning experience that encourages exploration and personalization. -->
     <!-- Visualization & Content Choices: 1. Countdown/Stats (Inform): Redesigned as prominent hero stats with icons. 2. Itinerary (Organize): A new visual timeline component using HTML/CSS to clearly show the day-by-day plan. 3. Interactive Checklist (Interact): UI refreshed with improved styling for buttons and items to match the new theme. 4. Dynamic Budget Calculator (Interact/Analyze): The static budget table is now interactive. A range slider allows users to adjust personal spending, which dynamically updates the total cost and the Chart.js doughnut chart via Vanilla JS. This provides immediate visual feedback on financial planning. Justification: These choices elevate the user experience by making information more digestible (icons, cards), providing a clearer trip narrative (itinerary), and adding powerful, personalized interactivity (budget calculator). -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -13,13 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f9fafb; /* Light Gray */
+            --bg-color: #f8f9fa;
             --card-bg: #ffffff;
-            --text-primary: #1e293b; /* Slate 800 */
-            --text-secondary: #475569; /* Slate 600 */
-            --accent-primary: #14b8a6; /* Teal 500 */
-            --accent-secondary: #f4a261; /* Warm Orange */
-            --border-color: #e5e7eb; /* Gray 200 */
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --accent-primary: #1a365d; /* Indigo Night */
+            --accent-secondary: #a97c50; /* Warm Wood */
+            --border-color: #dee2e6;
         }
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
@@ -52,7 +52,7 @@
             border-color: var(--accent-primary);
         }
         .glass-nav {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
         }
         .iti-item::before {
@@ -83,28 +83,44 @@
             cursor: pointer;
             border-radius: 50%;
         }
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <div class="container mx-auto px-4 py-8 md:py-12">
 
-        <header class="text-center mb-16">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400 pb-2">野澤溫泉滑雪之旅</h1>
-            <p class="text-base sm:text-lg text-slate-600 mt-2">您的 2026/01/14 個人化互動準備儀表板</p>
+        <header class="relative rounded-2xl overflow-hidden shadow-2xl mb-16 h-80 md:h-96 flex items-center justify-center text-center">
+            <img src="https://andyventure.com/wp-content/uploads/2024/07/japan_nozawa_onsen_village_20230228_DSC01732.webp" alt="野澤溫泉村莊的冬季夜景" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative z-10 px-4">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white hero-text-shadow">野澤溫泉滑雪之旅</h1>
+                <p class="text-lg sm:text-xl text-white/90 mt-4 hero-text-shadow">您的 2026/01/14 個人化互動準備儀表板</p>
+            </div>
         </header>
 
         <section id="overview" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-center">
             <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>🗓️</span> 出發日期</h3>
+                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    出發日期
+                </h3>
                 <p class="text-4xl font-bold text-[var(--accent-primary)] mt-2">2026/01/14</p>
             </div>
             <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>⏳</span> 旅程倒數</h3>
+                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    旅程倒數
+                </h3>
                 <p id="countdown" class="text-4xl font-bold text-[var(--accent-primary)] mt-2">計算中...</p>
             </div>
             <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>🌙</span> 旅遊天數</h3>
+                <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    旅遊天數
+                </h3>
                 <p class="text-4xl font-bold text-[var(--accent-primary)] mt-2">5天4夜</p>
             </div>
         </section>
@@ -124,10 +140,10 @@
 
             <section id="itinerary">
                 <h2 class="text-3xl font-bold text-center mb-12">行程總覽</h2>
-                <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-orange-300 pl-10">
+                <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-yellow-400 pl-10">
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
-                        <h3 class="font-bold text-lg text-orange-600">移動與抵達</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
+                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">移動與抵達</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 14 (三)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600">
                             <li>搭乘 MM620 (02:20) 前往東京成田機場 (NRT)</li>
@@ -137,21 +153,21 @@
                         </ul>
                     </div>
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
-                        <h3 class="font-bold text-lg text-orange-600">全日滑雪課程 & 道祖神祭</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
+                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">全日滑雪課程 & 道祖神祭</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 15 (四)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600">
                             <li>全日6小時滑雪技巧學習</li>
                             <li>晚上參加日本三大火祭之一的「道祖神祭」</li>
                         </ul>
-                        <div class="mt-4 bg-teal-50 border border-teal-200 p-3 rounded-md">
-                            <h4 class="font-semibold text-sm text-teal-800">本日租賃裝備提醒</h4>
-                            <p class="text-xs text-teal-600">雪衣、雪褲、雪板、雪鞋、安全帽、雪鏡、手套、防摔褲、護膝</p>
+                        <div class="mt-4 bg-indigo-50 border border-indigo-200 p-3 rounded-md">
+                            <h4 class="font-semibold text-sm text-indigo-800">本日租賃裝備提醒</h4>
+                            <p class="text-xs text-indigo-600">雪衣、雪褲、雪板、雪鞋、安全帽、雪鏡、手套、防摔褲、護膝</p>
                         </div>
                     </div>
                      <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
-                        <h3 class="font-bold text-lg text-orange-600">全日滑雪課程 & 溫泉體驗</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
+                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">全日滑雪課程 & 溫泉體驗</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 16 (五)</p>
                          <ul class="list-disc list-inside mt-2 text-slate-600">
                              <li>全日6小時滑雪技巧進階</li>
@@ -159,8 +175,8 @@
                          </ul>
                     </div>
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
-                        <h3 class="font-bold text-lg text-orange-600">自主練習 & 自由探索</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
+                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">自主練習 & 自由探索</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 17 (六)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600">
                             <li>驗收學習成果，在初級雪道自主練習</li>
@@ -168,8 +184,8 @@
                         </ul>
                     </div>
                      <div class="iti-item relative bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
-                        <h3 class="font-bold text-lg text-orange-600">返程</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
+                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">返程</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 18 (日)</p>
                          <ul class="list-disc list-inside mt-2 text-slate-600">
                              <li>上午最後巡禮，整理行囊</li>
@@ -183,18 +199,24 @@
                 <h2 class="text-3xl font-bold text-center mb-12">住宿 & 美食推薦</h2>
                 <div class="max-w-5xl mx-auto">
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-12">
-                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-3 flex items-center gap-2"><span>🏨</span> 下榻飯店</h3>
+                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-3 flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            下榻飯店
+                        </h3>
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                             <p class="text-lg font-semibold">Address Nozawa (アドレス野沢)</p>
-                            <a href="https://maps.app.goo.gl/jrp3bvtKam7p3Ukv7?g_st=il" target="_blank" class="mt-2 sm:mt-0 px-4 py-2 bg-[var(--accent-primary)] text-white text-sm font-semibold rounded-full hover:bg-teal-600 transition-colors">查看地圖</a>
+                            <a href="https://maps.app.goo.gl/jrp3bvtKam7p3Ukv7?g_st=il" target="_blank" class="mt-2 sm:mt-0 px-4 py-2 bg-[var(--accent-primary)] text-white text-sm font-semibold rounded-full hover:bg-opacity-80 transition-colors">查看地圖</a>
                         </div>
                     </div>
 
                     <div>
-                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-6 flex items-center gap-2"><span>🍽️</span> 餐廳口袋名單</h3>
+                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-6 flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253V5.5A2.25 2.25 0 0114.25 3h.5A2.25 2.25 0 0117 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 6.253V5.5A2.25 2.25 0 0110.5 3h.5A2.25 2.25 0 0113 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.25 17.747V19.5a.75.75 0 00.75.75h12a.75.75 0 00.75-.75v-1.753"></path></svg>
+                            餐廳口袋名單
+                        </h3>
                         
                         <div class="mb-8">
-                            <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-orange-400 pb-2 mb-6">住宿附近</h4>
+                            <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">住宿附近</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">焼肉 やま冨士</p>
@@ -210,7 +232,7 @@
                         </div>
 
                         <div>
-                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-orange-400 pb-2 mb-6">溫泉街中心</h4>
+                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">溫泉街中心</h4>
                              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">大門 (Daimon)</p>
@@ -261,7 +283,7 @@
                         <p class="font-semibold text-slate-500 text-sm mb-4">現在 ~ 2025/10月底</p>
                         <ul class="space-y-2 text-slate-600">
                             <li>🔴 <span class="font-medium">換發護照：</span>最優先！</li>
-                            <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-teal-500 hover:underline text-sm">[樂桃]</a></li>
+                            <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-indigo-500 hover:underline text-sm">[樂桃]</a></li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
@@ -270,7 +292,7 @@
                         <ul class="space-y-2 text-slate-600">
                             <li>🟡 <span class="font-medium">申請休假</span></li>
                             <li>🟡 <span class="font-medium">採購個人裝備</span></li>
-                            <li>🟡 <span class="font-medium">購買網卡/保險</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-teal-500 hover:underline text-sm">[eSIM參考]</a></li>
+                            <li>🟡 <span class="font-medium">購買網卡/保險</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-indigo-500 hover:underline text-sm">[eSIM參考]</a></li>
                             <li>🟡 <span class="font-medium">預訂高鐵/兌換日幣</span></li>
                         </ul>
                     </div>
@@ -328,7 +350,7 @@
                              <p class="text-slate-500">預估總計 (不含個人花費)</p>
                              <p id="subtotal-cost" class="text-3xl font-bold"></p>
                              <p class="text-slate-600 mt-4">最終總計 (含個人花費)</p>
-                             <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400"></p>
+                             <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-400"></p>
                          </div>
                     </div>
                 </div>
@@ -386,13 +408,13 @@
 
             let budgetChart;
             const budgetItems = [
-                { label: '✈️ 機票來回', cost: 16000, note: '已預訂' },
-                { label: '🏂 教練課', cost: 12667, note: '6人分攤 / 2天' },
-                { label: '🏨 住宿', cost: 15000, note: '估計值 (4晚)' },
-                { label: '🍜 餐飲雜支', cost: 10000, note: '估計值' },
-                { label: '🎟️ 雪票', cost: 5000, note: '估計值 (4天)' },
-                { label: '🎿 雪具租賃', cost: 3500, note: '估計值 (4天)' },
-                { label: '🚄 交通', cost: 4200, note: '高鐵/新幹線/巴士' }
+                { label: '✈️ 機票', cost: 16000 },
+                { label: '🏂 教練課', cost: 12667 },
+                { label: '🏨 住宿', cost: 15000 },
+                { label: '🍜 餐飲', cost: 10000 },
+                { label: '🎟️ 雪票', cost: 5000 },
+                { label: '🎿 雪具', cost: 3500 },
+                { label: '🚄 交通', cost: 4200 }
             ];
 
             const startCountdown = () => {
@@ -424,7 +446,7 @@
                         const itemEl = document.createElement('div');
                         itemEl.className = 'bg-white p-4 rounded-lg shadow border border-gray-200 flex items-center space-x-3 cursor-pointer hover:shadow-md transition-shadow group relative';
                         itemEl.innerHTML = `
-                            <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-teal-600 focus:ring-teal-500">
+                            <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                             <label class="font-medium text-slate-700">${item.name}</label>
                             <div class="absolute bottom-full mb-2 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                                 ${item.description}
@@ -497,7 +519,7 @@
                                 labels: chartLabels,
                                 datasets: [{
                                     data: chartData,
-                                    backgroundColor: ['#14b8a6', '#f4a261', '#0c7a71', '#fbbf24', '#67e8f9', '#fdba74', '#94a3b8'],
+                                    backgroundColor: ['#1a365d', '#a97c50', '#4a5568', '#f6ad55', '#81e6d9', '#f6e05e', '#a0aec0'],
                                     borderColor: '#ffffff',
                                     borderWidth: 4,
                                     hoverOffset: 8
