@@ -160,7 +160,7 @@
                         <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
                             <li>全日6小時滑雪技巧學習</li>
                             <li>晚餐推薦：<span class="font-bold">焼肉 やま冨士</span> (住宿附近燒肉)</li>
-                            <li>晚上參加日本三大火祭之一的「道祖神祭」，體驗獨特的火光與祈福儀式。</li>
+                            <li>晚上19:00參加日本三大火祭之一的「道祖神祭」，體驗獨特的火光與祈福儀式。</li>
                         </ul>
                         <div class="mt-4 bg-indigo-50 border border-indigo-200 p-3 rounded-md">
                             <h4 class="font-semibold text-sm text-indigo-800">本日租賃裝備提醒</h4>
@@ -303,10 +303,10 @@
                              <div class="bg-gray-50 p-4 rounded-lg border">
                                 <h4 class="font-semibold text-slate-700 mb-3 text-center">裝備檢查清單</h4>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                                    <div><strong class="text-slate-600">頭部：</strong><p>毛帽、安全帽、雪鏡、面罩/脖圍</p></div>
-                                    <div><strong class="text-slate-600">上半身：</strong><p>底層衣、中層衣、雪衣</p></div>
-                                    <div><strong class="text-slate-600">下半身：</strong><p>底層褲、防摔褲(建議)、雪褲</p></div>
-                                    <div><strong class="text-slate-600">手腳：</strong><p>防水手套、羊毛雪襪</p></div>
+                                    <div><strong class="text-slate-600">頭部：</strong><p>毛帽、脖圍</p></div>
+                                    <div><strong class="text-slate-600">上半身：</strong><p>底層衣、中層衣</p></div>
+                                    <div><strong class="text-slate-600">下半身：</strong><p>底層褲</p></div>
+                                    <div><strong class="text-slate-600">手腳：</strong><p>防水手套、羊毛長雪襪</p></div>
                                 </div>
                             </div>
                         </div>
@@ -463,7 +463,7 @@
                                     <li>🟡 <span class="font-medium">採購個人裝備</span></li>
                                     <li>🟡 <span class="font-medium">購買網卡</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm">[eSIM參考]</a></li>
                                     <li>🟡 <span class="font-medium">購買保險</span></li>
-                                    <li>🟡 <span class="font-medium">預訂高鐵</span></li>
+                                    <li>🟡 <span class="font-medium">預訂高鐵(12/17)</span></li>
                                     <li>🟡 <span class="font-medium">兌換日幣</span></li>
                                 </ul>
                             </div>
@@ -563,19 +563,19 @@
             const checklistData = [
                 { name: '運動排汗衣褲', category: 'buy', description: '準備2套，絕對避免棉質！選擇聚酯纖維或羊毛材質。' },
                 { name: '刷毛中層衣', category: 'buy', description: '1-2件，作為保暖中層。' },
+                { name: '防水手套', category: 'buy', description: '保暖' },
                 { name: '中高筒雪襪', category: 'buy', description: '準備5雙，羊毛或機能材質，保護腳踝。' },
-                { name: '面罩/脖圍', category: 'buy', description: '防風、防曬、保護臉部。' },
+                { name: '脖圍、雪帽', category: 'buy', description: '防風、防曬、保護臉部。' },
                 { name: '拋棄式內褲', category: 'buy', description: '方便旅行使用，依天數準備。' },
                 { name: '護照/身分證', category: 'pack', description: '最重要的身分證明文件。' },
                 { name: '日幣現金/信用卡', category: 'pack', description: '準備足夠的現金以備不時之需。' },
-                { name: '個人藥品', category: 'pack', description: '感冒藥、腸胃藥、止痛藥、痠痛貼布等。' },
-                { name: '生理用品', category: 'pack', description: '若遇生理期，請預先準備相關用品。' },
                 { name: '維持器', category: 'pack', description: '個人牙齒維持器。' },
-                { name: '防曬乳/護唇膏', category: 'pack', description: '雪地紫外線強烈，空氣乾燥。' },
+                { name: '防曬乳、乳液、護唇膏', category: 'pack', description: '雪地紫外線強烈，空氣乾燥。' },
                 { name: '手機/充電器', category: 'pack', description: '包含行動電源，保持通訊暢通。' },
-                { name: '日本上網卡/WiFi', category: 'pack', description: '預先購買或租用，確保網路連線。' },
-                { name: '防水雪靴', category: 'pack', description: '非滑雪時在雪地行走穿著。' },
-                { name: '日常便服', category: 'pack', description: '準備2套，在旅館或非滑雪時穿著。' }
+                { name: '日本上網卡/WiFi', category: 'buy', description: '預先購買或租用，確保網路連線。' },
+                { name: '日常便服', category: 'pack', description: '準備2套，在旅館或非滑雪時穿著。' },
+                { name: '暖暖包', category: 'buy', description: '保暖' },
+                { name: '運動內衣', category: 'buy', description: '準備2套' }
             ];
 
             let budgetChart;
