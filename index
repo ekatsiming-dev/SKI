@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>野澤滑雪互動準備儀表板</title>
+    <!-- Chosen Palette: Cool Horizon -->
+    <!-- Application Structure Plan: The application is structured as a single-page dashboard with three main interactive sections: Roadmap, Checklist, and Budget. This design was chosen to consolidate all critical planning information into one cohesive and easily navigable view. Users can get a quick overview with the countdown, follow a step-by-step timeline, interactively manage their packing with a filterable checklist, and understand their financial planning through a visual chart. This integrated approach is more user-friendly and efficient than separate static documents, as it supports a seamless planning flow from high-level timeline to detailed task management and financial awareness. -->
+    <!-- Visualization & Content Choices: 1. Countdown Timer (Inform): Dynamic text to create urgency and context (Vanilla JS). 2. Timeline (Organize): A structured HTML/CSS flow to present the preparation phases chronologically. 3. Interactive Checklist (Organize/Interact): An HTML list dynamically rendered and filtered by JS. This turns a static list into a functional tool. 4. Budget Doughnut Chart (Inform/Compare): A Chart.js canvas visualization to show estimated cost proportions, making financial data easy to grasp. Justification: These choices provide a multi-faceted view of the preparation process, combining procedural guidance, actionable tasks, and financial insights in the most intuitive formats. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+            color: #073B4C;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px; 
+            top: 4px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #118AB2;
+            border: 4px solid #f8fafc;
+            z-index: 10;
+        }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #EF4444;
+            transform: translateY(-2px);
+        }
+        .btn-filter.active {
+            background-color: #073B4C;
+            color: white;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#073B4C]">野澤滑雪互動準備儀表板</h1>
+            <p class="text-lg text-slate-600 mt-2">您的 2026/01/14 出發倒數計時計畫</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center">
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-500">總準備階段</h3>
+                <p class="text-5xl font-bold text-[#118AB2]">3</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-500">出發日期</h3>
+                <p class="text-4xl font-bold text-[#118AB2]">2026/01/14</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-500">倒數計時</h3>
+                <p id="countdown" class="text-4xl font-bold text-[#118AB2]">計算中...</p>
+            </div>
+        </section>
+
+        <nav class="sticky top-0 bg-[#f8fafc]/80 backdrop-blur-sm z-20 py-4 mb-12 border-b-2 border-slate-200">
+            <div class="flex justify-center items-center space-x-6 md:space-x-10 text-lg font-bold">
+                <a href="#roadmap" class="nav-link text-slate-600 hover:text-red-500">行動計畫</a>
+                <a href="#checklist" class="nav-link text-slate-600 hover:text-red-500">互動清單</a>
+                <a href="#budget" class="nav-link text-slate-600 hover:text-red-500">預算分析</a>
+            </div>
+        </nav>
+
+        <main class="space-y-20">
+            <section id="roadmap">
+                <h2 class="text-3xl font-bold text-center mb-10 text-[#073B4C]">行動計畫 Roadmap</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative pl-12 border-l-4 border-slate-200">
+                        
+                        <div class="mb-16 timeline-item">
+                            <h3 class="text-2xl font-bold text-[#118AB2] mb-2 relative">第一階段：核心準備期</h3>
+                            <p class="font-semibold text-slate-500 mb-4">現在 ~ 2025年10月底</p>
+                            <div class="bg-white p-6 rounded-lg shadow-md space-y-3 border border-slate-200">
+                                <p>🔴 <span class="font-bold">換發護照：</span>最優先事項！立即確認辦理文件與時間。</p>
+                                <p>🔴 <span class="font-bold">預訂機票 & 住宿：</span>護照辦妥後，立即與朋友確認並完成預訂。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-16 timeline-item">
+                            <h3 class="text-2xl font-bold text-[#118AB2] mb-2 relative">第二階段：裝備與細節規劃期</h3>
+                            <p class="font-semibold text-slate-500 mb-4">2025年11月 ~ 12月</p>
+                            <div class="bg-white p-6 rounded-lg shadow-md space-y-3 border border-slate-200">
+                                <p>🟡 <span class="font-bold">完成迪卡儂採購：</span>趁尺寸齊全時買好，避免年底人潮。</p>
+                                <p>🟡 <span class="font-bold">預訂高鐵票：</span>設定提醒，搶早鳥優惠 (12月中旬)。</p>
+                                <p>🟡 <span class="font-bold">購買旅遊保險：</span>確認理賠滑雪運動傷害。</p>
+                                <p>🟡 <span class="font-bold">兌換日幣：</span>關注匯率，分批或一次換足。</p>
+                                <p>🟡 <span class="font-bold">預約課程/雪具 (建議)：</span>提早預約熱門中文教練。</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-16 timeline-item">
+                            <h3 class="text-2xl font-bold text-[#118AB2] mb-2 relative">第三階段：最終衝刺期</h3>
+                            <p class="font-semibold text-slate-500 mb-4">2026年1月</p>
+                            <div class="bg-white p-6 rounded-lg shadow-md space-y-3 border border-slate-200">
+                                <p>🔵 <span class="font-bold">填寫 Visit Japan Web：</span>出發前一週完成並截圖。</p>
+                                <p>🔵 <span class="font-bold">打包行李：</span>出發前4天開始對照清單打包。</p>
+                                <p>🔵 <span class="font-bold">最終確認與休息：</span>充電、確認航班，儲備體力。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="checklist">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">互動式準備清單</h2>
+                <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">點擊下方按鈕篩選不同類別的準備項目。將滑鼠懸停在項目上可查看詳細說明，並勾選以追蹤您的進度。</p>
+                <div id="checklist-filters" class="flex flex-wrap justify-center gap-2 mb-8">
+                </div>
+                <div id="checklist-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+            </section>
+
+            <section id="budget">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">旅費預算分析</h2>
+                 <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">這是一份基於一般經驗的預估費用佔比，幫助您了解主要的開銷分佈。實際費用會因您的選擇而異。</p>
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-200 max-w-2xl mx-auto">
+                    <div class="chart-container">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checklistData = [
+                { name: '運動排汗上衣', category: 'buy', description: '2-3件，絕對避免棉質！選擇聚酯纖維或羊毛材質。' },
+                { name: '運動排汗緊身褲', category: 'buy', description: '2件，絕對避免棉質！' },
+                { name: '刷毛衣 (Fleece)', category: 'buy', description: '1-2件，作為保暖中層。' },
+                { name: '防水防風雪衣', category: 'buy', description: '防水係數至少10,000mm，最好有雪裙。' },
+                { name: '防水防風雪褲', category: 'buy', description: '防水係數至少10,000mm。' },
+                { name: '中高筒雪襪', category: 'buy', description: '2-3雙，羊毛或機能材質，保護腳踝。' },
+                { name: '防水滑雪手套', category: 'buy', description: '保護雙手溫暖乾燥。' },
+                { name: '面罩/頭巾', category: 'buy', description: '防風、防曬、保護臉部。' },
+                { name: '雪鏡 (Goggles)', category: 'buy', description: '防霧、防紫外線，應對不同天氣。' },
+                { name: '雪板/雙板雪杖', category: 'rent', description: '在野澤當地雪具店租用，方便且專業。' },
+                { name: '雪鞋 (Boots)', category: 'rent', description: '尺寸合腳最重要，由專業店家協助挑選。' },
+                { name: '安全帽 (Helmet)', category: 'rent', description: '安全第一！強烈建議租用。' },
+                { name: '護照/身分證', category: 'pack', description: '最重要的身分證明文件。' },
+                { name: '日幣現金/信用卡', category: 'pack', description: '準備足夠的現金以備不時之需。' },
+                { name: '個人藥品', category: 'pack', description: '感冒藥、腸胃藥、止痛藥、痠痛貼布等。' },
+                { name: '防曬乳/護唇膏', category: 'pack', description: '雪地紫外線強烈，空氣乾燥。' },
+                { name: '手機/充電器', category: 'pack', description: '包含行動電源，保持通訊暢通。' },
+                { name: '日本上網卡/WiFi', category: 'pack', description: '預先購買或租用，確保網路連線。' },
+                { name: '防水雪靴', category: 'pack', description: '非滑雪時在雪地行走穿著。' },
+                { name: '泳衣', category: 'pack', description: '野澤是溫泉鄉，別忘了泡溫泉！' }
+            ];
+
+            const budgetData = {
+                labels: ['機票', '住宿', '交通 (當地)', '雪票 (Lift Pass)', '裝備租賃', '課程', '餐飲', '其他'],
+                datasets: [{
+                    label: '預算分配',
+                    data: [25, 30, 5, 15, 8, 5, 10, 2],
+                    backgroundColor: ['#264653', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#d62828', '#fca311', '#a8dadc'],
+                    borderColor: '#f8fafc',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            };
+
+            const filtersContainer = document.getElementById('checklist-filters');
+            const checklistContainer = document.getElementById('checklist-container');
+            const categories = {
+                'all': '全部項目',
+                'buy': '自行採購',
+                'rent': '當地租賃',
+                'pack': '打包用品'
+            };
+
+            const renderChecklist = (filter = 'all') => {
+                checklistContainer.innerHTML = '';
+                const filteredData = filter === 'all' ? checklistData : checklistData.filter(item => item.category === filter);
+                
+                filteredData.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'bg-white p-4 rounded-lg shadow border border-slate-200 flex items-center space-x-3 cursor-pointer hover:shadow-md transition-shadow group relative';
+                    itemEl.innerHTML = `
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        <label class="font-medium text-slate-700">${item.name}</label>
+                        <div class="absolute bottom-full mb-2 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                            ${item.description}
+                            <svg class="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+                        </div>
+                    `;
+                    checklistContainer.appendChild(itemEl);
+                });
+            };
+
+            const setupFilters = () => {
+                Object.keys(categories).forEach(key => {
+                    const button = document.createElement('button');
+                    button.textContent = categories[key];
+                    button.dataset.filter = key;
+                    button.className = 'btn-filter px-4 py-2 rounded-md font-semibold text-sm transition bg-white border border-slate-300 hover:bg-slate-100';
+                    if (key === 'all') {
+                        button.classList.add('active');
+                    }
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        renderChecklist(key);
+                    });
+                    filtersContainer.appendChild(button);
+                });
+            };
+
+            const startCountdown = () => {
+                const targetDate = new Date('2026-01-14T00:00:00').getTime();
+                const countdownEl = document.getElementById('countdown');
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = targetDate - now;
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        countdownEl.innerHTML = "出發！";
+                        return;
+                    }
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    countdownEl.innerHTML = `${days} 天`;
+                }, 1000);
+            };
+
+            const renderBudgetChart = () => {
+                const ctx = document.getElementById('budgetChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: budgetData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: { size: 12, family: "'Inter', 'Noto Sans TC', sans-serif" },
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += context.parsed + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            };
+            
+            startCountdown();
+            setupFilters();
+            renderChecklist();
+            renderBudgetChart();
+        });
+    </script>
+</body>
+</html>
