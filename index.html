@@ -17,8 +17,8 @@
             --card-bg: #ffffff;
             --text-primary: #1e293b; /* Slate 800 */
             --text-secondary: #475569; /* Slate 600 */
-            --accent-primary: #3b82f6; /* Blue 500 */
-            --accent-secondary: #14b8a6; /* Teal 500 */
+            --accent-primary: #14b8a6; /* Teal 500 */
+            --accent-secondary: #f4a261; /* Warm Orange */
             --border-color: #e5e7eb; /* Gray 200 */
         }
         body {
@@ -90,22 +90,22 @@
     <div class="container mx-auto px-4 py-8 md:py-12">
 
         <header class="text-center mb-16">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400 pb-2">野澤溫泉滑雪之旅</h1>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400 pb-2">野澤溫泉滑雪之旅</h1>
             <p class="text-base sm:text-lg text-slate-600 mt-2">您的 2026/01/14 個人化互動準備儀表板</p>
         </header>
 
         <section id="overview" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-center">
             <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
                 <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>🗓️</span> 出發日期</h3>
-                <p class="text-4xl font-bold text-blue-500 mt-2">2026/01/14</p>
+                <p class="text-4xl font-bold text-[var(--accent-primary)] mt-2">2026/01/14</p>
             </div>
             <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
                 <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>⏳</span> 旅程倒數</h3>
-                <p id="countdown" class="text-4xl font-bold text-blue-500 mt-2">計算中...</p>
+                <p id="countdown" class="text-4xl font-bold text-[var(--accent-primary)] mt-2">計算中...</p>
             </div>
             <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
                 <h3 class="text-lg font-semibold text-slate-500 flex items-center justify-center gap-2"><span>🌙</span> 旅遊天數</h3>
-                <p class="text-4xl font-bold text-blue-500 mt-2">5天4夜</p>
+                <p class="text-4xl font-bold text-[var(--accent-primary)] mt-2">5天4夜</p>
             </div>
         </section>
 
@@ -124,10 +124,10 @@
 
             <section id="itinerary">
                 <h2 class="text-3xl font-bold text-center mb-12">行程總覽</h2>
-                <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-teal-300 pl-10">
+                <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-orange-300 pl-10">
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
-                        <h3 class="font-bold text-lg text-teal-600">移動與抵達</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
+                        <h3 class="font-bold text-lg text-orange-600">移動與抵達</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 14 (三)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600">
                             <li>搭乘 MM620 (02:20) 前往東京成田機場 (NRT)</li>
@@ -137,17 +137,21 @@
                         </ul>
                     </div>
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
-                        <h3 class="font-bold text-lg text-teal-600">全日滑雪課程 & 道祖神祭</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
+                        <h3 class="font-bold text-lg text-orange-600">全日滑雪課程 & 道祖神祭</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 15 (四)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600">
                             <li>全日6小時滑雪技巧學習</li>
                             <li>晚上參加日本三大火祭之一的「道祖神祭」</li>
                         </ul>
+                        <div class="mt-4 bg-teal-50 border border-teal-200 p-3 rounded-md">
+                            <h4 class="font-semibold text-sm text-teal-800">本日租賃裝備提醒</h4>
+                            <p class="text-xs text-teal-600">雪衣、雪褲、雪板、雪鞋、安全帽、雪鏡、手套、防摔褲、護膝</p>
+                        </div>
                     </div>
                      <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
-                        <h3 class="font-bold text-lg text-teal-600">全日滑雪課程 & 溫泉體驗</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
+                        <h3 class="font-bold text-lg text-orange-600">全日滑雪課程 & 溫泉體驗</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 16 (五)</p>
                          <ul class="list-disc list-inside mt-2 text-slate-600">
                              <li>全日6小時滑雪技巧進階</li>
@@ -155,8 +159,8 @@
                          </ul>
                     </div>
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
-                        <h3 class="font-bold text-lg text-teal-600">自主練習 & 自由探索</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
+                        <h3 class="font-bold text-lg text-orange-600">自主練習 & 自由探索</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 17 (六)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600">
                             <li>驗收學習成果，在初級雪道自主練習</li>
@@ -164,8 +168,8 @@
                         </ul>
                     </div>
                      <div class="iti-item relative bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
-                        <h3 class="font-bold text-lg text-teal-600">返程</h3>
+                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-orange-400 text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
+                        <h3 class="font-bold text-lg text-orange-600">返程</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 18 (日)</p>
                          <ul class="list-disc list-inside mt-2 text-slate-600">
                              <li>上午最後巡禮，整理行囊</li>
@@ -179,69 +183,69 @@
                 <h2 class="text-3xl font-bold text-center mb-12">住宿 & 美食推薦</h2>
                 <div class="max-w-5xl mx-auto">
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-12">
-                        <h3 class="font-bold text-xl text-blue-600 mb-3 flex items-center gap-2"><span>🏨</span> 下榻飯店</h3>
+                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-3 flex items-center gap-2"><span>🏨</span> 下榻飯店</h3>
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                             <p class="text-lg font-semibold">Address Nozawa (アドレス野沢)</p>
-                            <a href="https://maps.app.goo.gl/jrp3bvtKam7p3Ukv7?g_st=il" target="_blank" class="mt-2 sm:mt-0 px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-full hover:bg-blue-600 transition-colors">查看地圖</a>
+                            <a href="https://maps.app.goo.gl/jrp3bvtKam7p3Ukv7?g_st=il" target="_blank" class="mt-2 sm:mt-0 px-4 py-2 bg-[var(--accent-primary)] text-white text-sm font-semibold rounded-full hover:bg-teal-600 transition-colors">查看地圖</a>
                         </div>
                     </div>
 
                     <div>
-                        <h3 class="font-bold text-xl text-blue-600 mb-6 flex items-center gap-2"><span>🍽️</span> 餐廳口袋名單</h3>
+                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-6 flex items-center gap-2"><span>🍽️</span> 餐廳口袋名單</h3>
                         
                         <div class="mb-8">
-                            <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-teal-400 pb-2 mb-6">住宿附近</h4>
+                            <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-orange-400 pb-2 mb-6">住宿附近</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">焼肉 やま冨士</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">肉舖老闆開的燒肉店，便宜好吃但煙霧繚繞。</p>
-                                    <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">お好み焼き 一ちゃん</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">住宿附近的大阪燒，有搭配部分小點心。</p>
-                                    <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-teal-400 pb-2 mb-6">溫泉街中心</h4>
+                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-orange-400 pb-2 mb-6">溫泉街中心</h4>
                              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">大門 (Daimon)</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">份量不錯的豬排飯、餃子，不接受預約。</p>
-                                    <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">ちゃんこ玉屋</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">不起眼的相撲鍋與壽喜燒火鍋店。</p>
-                                    <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                  <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">ばあどこ (Banri)</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">受外國人歡迎，店員會講中文，似乎有素火鍋。</p>
-                                    <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                  <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">大まるそば店</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">蕎麥麵店，冬季似乎有熱湯選項。</p>
-                                    <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">三吉 (San-kichi)</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">關東煮，特色是有賣馬肉刺身。</p>
-                                    <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">そば処 大茂ん</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">少數沒客滿的蕎麥麵店，可預約牛肉壽喜燒。</p>
-                                    <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                                  <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105">
                                     <p class="font-bold">Playce Nozawa</p>
                                     <p class="text-sm text-slate-500 mt-1 mb-3">同時賣披薩、拉麵，晚上是居酒屋。</p>
-                                    <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" class="text-sm font-semibold text-blue-500 hover:underline">查看地圖 →</a>
+                                    <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline">查看地圖 →</a>
                                 </div>
                             </div>
                         </div>
@@ -253,25 +257,25 @@
                 <h2 class="text-3xl font-bold text-center mb-12">準備時程計畫</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="text-xl font-bold text-blue-600 mb-3">第一階段：核心準備</h3>
+                        <h3 class="text-xl font-bold text-[var(--accent-primary)] mb-3">第一階段：核心準備</h3>
                         <p class="font-semibold text-slate-500 text-sm mb-4">現在 ~ 2025/10月底</p>
                         <ul class="space-y-2 text-slate-600">
                             <li>🔴 <span class="font-medium">換發護照：</span>最優先！</li>
-                            <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-blue-500 hover:underline text-sm">[樂桃]</a></li>
+                            <li>🔴 <span class="font-medium">預訂機票 & 住宿</span> <a href="https://www.flypeach.com/tw" target="_blank" class="text-teal-500 hover:underline text-sm">[樂桃]</a></li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="text-xl font-bold text-blue-600 mb-3">第二階段：細節規劃</h3>
+                        <h3 class="text-xl font-bold text-[var(--accent-primary)] mb-3">第二階段：細節規劃</h3>
                         <p class="font-semibold text-slate-500 text-sm mb-4">2025/11 ~ 12月</p>
                         <ul class="space-y-2 text-slate-600">
                             <li>🟡 <span class="font-medium">申請休假</span></li>
                             <li>🟡 <span class="font-medium">採購個人裝備</span></li>
-                            <li>🟡 <span class="font-medium">購買網卡/保險</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-blue-500 hover:underline text-sm">[eSIM參考]</a></li>
+                            <li>🟡 <span class="font-medium">購買網卡/保險</span> <a href="https://www.klook.com/zh-TW/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/" target="_blank" class="text-teal-500 hover:underline text-sm">[eSIM參考]</a></li>
                             <li>🟡 <span class="font-medium">預訂高鐵/兌換日幣</span></li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="text-xl font-bold text-blue-600 mb-3">第三階段：最終衝刺</h3>
+                        <h3 class="text-xl font-bold text-[var(--accent-primary)] mb-3">第三階段：最終衝刺</h3>
                         <p class="font-semibold text-slate-500 text-sm mb-4">2026/1月</p>
                         <ul class="space-y-2 text-slate-600">
                             <li>🔵 <span class="font-medium">填寫 Visit Japan Web</span></li>
@@ -284,7 +288,7 @@
             
             <section id="checklist">
                 <h2 class="text-3xl font-bold text-center mb-4">互動式準備清單</h2>
-                <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">清單已根據最新的服裝策略更新。點擊按鈕篩選，勾選以追蹤進度。</p>
+                <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">此清單專注於您需自行採購與打包的物品。當地租賃裝備請參考行程總覽。</p>
                 <div id="checklist-filters" class="flex flex-wrap justify-center gap-2 mb-8">
                 </div>
                 <div id="checklist-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -308,7 +312,7 @@
                             <input type="range" id="personal-spending" min="0" max="20000" step="1000" value="5000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                             <div class="flex justify-between text-sm text-slate-500 mt-1">
                                 <span>TWD 0</span>
-                                <span id="personal-spending-value" class="font-bold text-blue-500">TWD 5,000</span>
+                                <span id="personal-spending-value" class="font-bold text-[var(--accent-primary)]">TWD 5,000</span>
                                 <span>TWD 20,000</span>
                             </div>
                         </div>
@@ -324,7 +328,7 @@
                              <p class="text-slate-500">預估總計 (不含個人花費)</p>
                              <p id="subtotal-cost" class="text-3xl font-bold"></p>
                              <p class="text-slate-600 mt-4">最終總計 (含個人花費)</p>
-                             <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400"></p>
+                             <p id="total-cost" class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-400"></p>
                          </div>
                     </div>
                 </div>
@@ -367,15 +371,6 @@
                 { name: '中高筒雪襪', category: 'buy', description: '準備5雙，羊毛或機能材質，保護腳踝。' },
                 { name: '面罩/脖圍', category: 'buy', description: '防風、防曬、保護臉部。' },
                 { name: '拋棄式內褲', category: 'buy', description: '方便旅行使用，依天數準備。' },
-                { name: '防水防風雪衣', category: 'rent', description: '外層衣物，新手建議租用即可。' },
-                { name: '防水防風雪褲', category: 'rent', description: '外層衣物，新手建議租用即可。' },
-                { name: '雪板/雙板雪杖', category: 'rent', description: '在野澤當地雪具店租用，方便且專業。' },
-                { name: '雪鞋 (Boots)', category: 'rent', description: '尺寸合腳最重要，由專業店家協助挑選。' },
-                { name: '安全帽 (Helmet)', category: 'rent', description: '安全第一！強烈建議租用。' },
-                { name: '雪鏡 (Goggles)', category: 'rent', description: '防霧、防紫外線，應對不同天氣。' },
-                { name: '防水滑雪手套', category: 'rent', description: '保護雙手溫暖乾燥。' },
-                { name: '防摔褲', category: 'rent', description: '新手強力推薦！保護臀部與尾椎。' },
-                { name: '護膝', category: 'rent', description: '增加對膝蓋的保護。' },
                 { name: '護照/身分證', category: 'pack', description: '最重要的身分證明文件。' },
                 { name: '日幣現金/信用卡', category: 'pack', description: '準備足夠的現金以備不時之需。' },
                 { name: '個人藥品', category: 'pack', description: '感冒藥、腸胃藥、止痛藥、痠痛貼布等。' },
@@ -419,7 +414,7 @@
             const setupChecklist = () => {
                 const filtersContainer = document.getElementById('checklist-filters');
                 const checklistContainer = document.getElementById('checklist-container');
-                const categories = { 'all': '全部項目', 'buy': '自行採購', 'rent': '當地租賃', 'pack': '打包用品' };
+                const categories = { 'all': '全部項目', 'buy': '自行採購', 'pack': '打包用品' };
 
                 const renderChecklist = (filter = 'all') => {
                     checklistContainer.innerHTML = '';
@@ -429,7 +424,7 @@
                         const itemEl = document.createElement('div');
                         itemEl.className = 'bg-white p-4 rounded-lg shadow border border-gray-200 flex items-center space-x-3 cursor-pointer hover:shadow-md transition-shadow group relative';
                         itemEl.innerHTML = `
-                            <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-teal-600 focus:ring-teal-500">
                             <label class="font-medium text-slate-700">${item.name}</label>
                             <div class="absolute bottom-full mb-2 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                                 ${item.description}
@@ -502,7 +497,7 @@
                                 labels: chartLabels,
                                 datasets: [{
                                     data: chartData,
-                                    backgroundColor: ['#3b82f6', '#14b8a6', '#f59e0b', '#ef4444', '#8b5cf6', '#6366f1', '#ec4899'],
+                                    backgroundColor: ['#14b8a6', '#f4a261', '#0c7a71', '#fbbf24', '#67e8f9', '#fdba74', '#94a3b8'],
                                     borderColor: '#ffffff',
                                     borderWidth: 4,
                                     hoverOffset: 8
