@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>野澤滑雪互動準備儀表板 | Nozawa Onsen Trip Planner</title>
+    <title>野澤溫泉滑雪之旅 | Nozawa Onsen Trip Planner</title>
     <!-- Chosen Palette: Nozawa Winter -->
     <!-- Application Structure Plan: Inspired by the provided reference, the structure is a complete redesign into a modern, card-based, single-page application. The key change is the introduction of a more dynamic grid layout and dedicated sections for a clearer narrative flow, from high-level planning (Roadmap, Itinerary) to actionable details (Checklist, Budget). A new 'Itinerary' section was added to provide a chronological story of the trip. The most significant interactive enhancement is the dynamic budget calculator with a slider, allowing real-time 'what-if' analysis of personal spending. This structure was chosen to transform the tool from a static checklist into an engaging, visually-driven planning experience that encourages exploration and personalization. -->
     <!-- Visualization & Content Choices: 1. Countdown/Stats (Inform): Redesigned as prominent hero stats with icons. 2. Itinerary (Organize): A new visual timeline component using HTML/CSS to clearly show the day-by-day plan. 3. Interactive Checklist (Interact): UI refreshed with improved styling for buttons and items to match the new theme. 4. Dynamic Budget Calculator (Interact/Analyze): The static budget table is now interactive. A range slider allows users to adjust personal spending, which dynamically updates the total cost and the Chart.js doughnut chart via Vanilla JS. This provides immediate visual feedback on financial planning. Justification: These choices elevate the user experience by making information more digestible (icons, cards), providing a clearer trip narrative (itinerary), and adding powerful, personalized interactivity (budget calculator). -->
@@ -129,7 +129,7 @@
                 <a href="#itinerary" class="nav-link">行程總覽</a>
                 <a href="#village-guide" class="nav-link">村莊探索</a>
                 <a href="#ski-guide" class="nav-link">滑雪指南</a>
-                <a href="#lodging" class="nav-link">住宿美食</a>
+                <a href="#food-guide" class="nav-link">美食推薦</a>
                 <a href="#roadmap" class="nav-link personal-nav-link hidden">準備計畫</a>
                 <a href="#checklist" class="nav-link personal-nav-link hidden">互動清單</a>
                 <a href="#budget" class="nav-link personal-nav-link hidden">預算分析</a>
@@ -211,12 +211,12 @@
                     <div class="max-w-5xl mx-auto space-y-12 mt-12">
                          <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
                             <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m6-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.93L5 10m6 0v10"></path></svg>
-                               泡湯禮儀
+                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                               村莊景點地圖
                             </h3>
                             <div class="bg-gray-100 rounded-lg overflow-hidden border">
-                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" alt="泡湯禮儀圖解" class="w-full h-auto object-contain">
-                            </div>
+                               <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" alt="野澤溫泉村景點地圖" class="w-full h-auto object-contain">
+                           </div>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
                             <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
@@ -224,7 +224,7 @@
                                外湯巡禮 (Sotoyu)
                             </h3>
                             <p class="text-slate-600 mb-6">「外湯」是村民共有的13座免費大眾湯屋。滑雪後泡湯能極大地放鬆肌肉。雖為免費，但建議在捐款箱投入少許金額支持維護。記得自備毛巾與盥洗用品。</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
                                 <div class="bg-gray-50 p-4 rounded-lg border">
                                     <p class="font-bold text-slate-700">夏季 (4月～11月)</p>
                                     <p>5:00 AM – 11:00 PM</p>
@@ -234,13 +234,11 @@
                                     <p>6:00 AM – 11:00 PM</p>
                                 </div>
                             </div>
-                             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div class="bg-white rounded-lg overflow-hidden border">
-                                   <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" alt="13座外湯地圖" class="w-full h-auto object-contain">
-                               </div>
-                               <div class="bg-white rounded-lg overflow-hidden border">
-                                   <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" alt="野澤溫泉村景點地圖" class="w-full h-auto object-contain">
-                               </div>
+                            <div class="bg-gray-100 rounded-lg overflow-hidden border mb-6">
+                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" alt="13座外湯地圖" class="w-full h-auto object-contain">
+                            </div>
+                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" alt="泡湯禮儀圖解" class="w-full h-auto object-contain">
                             </div>
                             <div class="mt-8">
                                  <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">13座外湯特色一覽</h4>
@@ -365,29 +363,14 @@
                  </details>
             </section>
 
-            <section id="lodging">
+            <section id="food-guide">
                 <details>
                     <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">住宿 & 美食推薦
+                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center">美食推薦
                             <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </h2>
                     </summary>
                     <div class="max-w-5xl mx-auto mt-12">
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-12">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                                <div>
-                                    <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-3 flex items-center gap-2">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                                        下榻飯店
-                                    </h3>
-                                    <p class="text-lg font-semibold">Yamasanso</p>
-                                </div>
-                                <div class="rounded-lg overflow-hidden border">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.915462284551!2d138.4422852!3d36.916285599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5ff61b5ae178668d%3A0x85073d9e6ac629b7!2sYamasanso!5e0!3m2!1szh-TW!2stw!4v1759327161987!5m2!1szh-TW!2stw" class="w-full h-48" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>
-                            </div>
-                        </div>
-
                         <div>
                             <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-6 flex items-center gap-2">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253V5.5A2.25 2.25 0 0114.25 3h.5A2.25 2.25 0 0117 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 6.253V5.5A2.25 2.25 0 0110.5 3h.5A2.25 2.25 0 0113 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.25 17.747V19.5a.75.75 0 00.75.75h12a.75.75 0 00.75-.75v-1.753"></path></svg>
