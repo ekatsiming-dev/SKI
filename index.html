@@ -240,6 +240,13 @@
                          <div class="space-y-1 text-slate-600">
                             <p><span class="font-semibold text-sm text-slate-500">午餐推薦：</span>上野、東京車站或成田機場用餐</p>
                          </div>
+                         <div class="mt-4 bg-red-50 border border-red-200 p-3 rounded-md flex items-start gap-2">
+                             <span class="text-xl">⚠️</span>
+                             <div>
+                                <h4 class="font-semibold text-sm text-red-800">轉乘時間提醒</h4>
+                                <p class="text-xs text-red-700">巴士抵達飯山站 (10:23) 到新幹線出發 (10:33) 僅有 <strong class="font-bold">10 分鐘</strong>，時間非常緊湊，請務必迅速行動！</p>
+                             </div>
+                         </div>
                     </div>
                 </div>
             </section>
@@ -308,142 +315,19 @@
                             <div class="bg-gray-50/90 backdrop-blur-md border-b">
                                 <div class="container mx-auto px-4">
                                     <div class="flex flex-wrap justify-center gap-2 md:gap-4 py-3">
-                                        <a href="#transport-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">交通指南</a>
+                                        <!-- Adjusted Order -->
+                                        <a href="#ski-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">滑雪指南</a>
                                         <a href="#fire-festival" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">火祭盛典</a>
                                         <a href="#village-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">村莊探索</a>
-                                        <a href="#ski-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">滑雪指南</a>
                                         <a href="#food-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">美食推薦</a>
+                                        <a href="#transport-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">交通指南</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="space-y-16">
-                            <section id="transport-guide" class="scroll-mt-36">
-                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">交通指南</h2>
-                                <div class="max-w-4xl mx-auto space-y-8">
-                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4">交通費用與時間總覽</h3>
-                                        <div class="overflow-x-auto">
-                                            <table class="w-full text-left text-sm">
-                                                <thead class="bg-gray-50">
-                                                    <tr>
-                                                        <th class="p-3 font-semibold">路段</th>
-                                                        <th class="p-3 font-semibold">交通工具</th>
-                                                        <th class="p-3 font-semibold text-center">預估時間</th>
-                                                        <th class="p-3 font-semibold text-right">單程費用 (每人)</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="border-b"><td class="p-3">成田機場 → 上野</td><td class="p-3">京成電鐵 Skyliner</td><td class="p-3 text-center">約 45 分鐘</td><td class="p-3 text-right font-mono">¥ 2,580</td></tr>
-                                                    <tr class="border-b"><td class="p-3">上野 → 飯山站</td><td class="p-3">北陸新幹線 (Hakutaka)</td><td class="p-3 text-center">約 1 小時 40 分</td><td class="p-3 text-right font-mono">~ ¥ 8,500</td></tr>
-                                                    <tr class="border-b"><td class="p-3">飯山站 → 野澤溫泉</td><td class="p-3">野澤溫泉線巴士</td><td class="p-3 text-center">約 25 分鐘</td><td class="p-3 text-right font-mono">¥ 600</td></tr>
-                                                </tbody>
-                                                <tfoot class="bg-gray-100">
-                                                    <tr>
-                                                        <td colspan="3" class="p-3 font-bold text-[var(--accent-primary)]">單程總計</td>
-                                                        <td class="p-3 text-right font-bold text-[var(--accent-primary)] font-mono">約 ¥ 11,680</td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            
-                            <section id="fire-festival" class="scroll-mt-36 py-12 md:py-16 bg-gray-100 rounded-2xl">
-                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#274C77] mb-4">火祭盛典</h2>
-                                <p class="text-center max-w-3xl mx-auto mb-10 text-gray-600">每年1月15日舉行的「道祖神祭典」，是日本三大火祭之一，場面壯觀震撼，為祈求村莊的繁榮與平安。點擊下方時間點以展開詳細內容。</p>
-                                <div class="max-w-3xl mx-auto">
-                                    <div class="relative border-l-4 border-[#274C77] space-y-2">
-                                        <div class="timeline-item pl-8">
-                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
-                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">下午 1:00 - 原木入村</button>
-                                            <div class="timeline-content">
-                                                <div class="bg-white p-4 mt-2 rounded-lg border">村民們合力將搭建祭典主體「社殿」的巨大原木，從深山中拖曳至祭典會場。這象徵著祭典的正式啟動，充滿了團結與力量。</div>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item pl-8">
-                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
-                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 7:00 - 社殿建成</button>
-                                            <div class="timeline-content">
-                                                <div class="bg-white p-4 mt-2 rounded-lg border">華麗的社殿搭建完成，同時，為村中新生兒祈福的「初燈籠」也陸續送達，形成一片溫暖的燈海。此時的會場充滿了祈福與期待的氛圍。</div>
-                                            </div>
-                                        </div>
-                                        <div class="timeline-item pl-8">
-                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
-                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 8:30 - 攻防戰開始</button>
-                                            <div class="timeline-content">
-                                                <div class="bg-white p-4 mt-2 rounded-lg border">祭典的最高潮！手持火把的村民們向社殿發動猛烈攻擊，而負責守護的「厄年」男性們則奮力抵抗。火光、吶喊聲與飛濺的火花交織，場面極為震撼。</div>
-                                            </div>
-                                        </div>
-                                         <div class="timeline-item pl-8">
-                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
-                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 10:00 - 焚燒社殿</button>
-                                            <div class="timeline-content">
-                                                <div class="bg-white p-4 mt-2 rounded-lg border">激烈的攻防戰結束後，社殿與燈籠被點燃，熊熊火焰直衝天際，象徵著淨化厄運、祈求新的一年平安順遂。</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section id="village-guide" class="scroll-mt-36">
-                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">溫泉村莊探索</h2>
-                                <div class="max-w-5xl mx-auto space-y-12">
-                                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                           村莊景點地圖
-                                        </h3>
-                                        <div class="bg-gray-100 rounded-lg overflow-hidden border">
-                                           <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" alt="野澤溫泉村景點地圖" class="w-full h-auto object-contain">
-                                       </div>
-                                    </div>
-                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20"></path></svg>
-                                           外湯巡禮 (Sotoyu)
-                                        </h3>
-                                        <p class="text-slate-600 mb-6">「外湯」是村民共有的13座免費大眾湯屋。滑雪後泡湯能極大地放鬆肌肉。雖為免費，但建議在捐款箱投入少許金額支持維護。記得自備毛巾與盥洗用品。</p>
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
-                                            <div class="bg-gray-50 p-4 rounded-lg border">
-                                                <p class="font-bold text-slate-700">夏季 (4月～11月)</p>
-                                                <p>5:00 AM – 11:00 PM</p>
-                                            </div>
-                                            <div class="bg-gray-50 p-4 rounded-lg border">
-                                                <p class="font-bold text-slate-700">冬季 (12月～3月)</p>
-                                                <p>6:00 AM – 11:00 PM</p>
-                                            </div>
-                                        </div>
-                                        <div class="bg-gray-100 rounded-lg overflow-hidden border mb-6">
-                                            <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" alt="13座外湯地圖" class="w-full h-auto object-contain">
-                                        </div>
-                                        <div class="bg-gray-100 rounded-lg overflow-hidden border">
-                                            <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" alt="泡湯禮儀圖解" class="w-full h-auto object-contain">
-                                        </div>
-                                        <div class="mt-8">
-                                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-[var(--accent-secondary)] pb-2 mb-6">13座外湯特色一覽</h4>
-                                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">大湯 (Oyu)</p><p class="text-slate-500">指標性湯屋，純硫磺泉。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">河原湯</p><p class="text-slate-500">水溫較高，含石膏-食鹽・硫磺泉。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">秋葉の湯</p><p class="text-slate-500">源自麻釜，含芒硝、石膏的硫磺泉。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">麻釜の湯</p><p class="text-slate-500">對痔瘡、糖尿病有療效。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">上寺湯</p><p class="text-slate-500">對切傷、燒傷癒合效果好。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">熊の手洗湯</p><p class="text-slate-500">對燒傷和切傷有療效。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">松葉の湯</p><p class="text-slate-500">與麻釜の湯療效相同。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">中尾の湯</p><p class="text-slate-500">最大木造澡堂，對皮膚病有效。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">新田の湯</p><p class="text-slate-500">對痔瘡、糖尿病、風濕病有效。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">真湯</p><p class="text-slate-500">純硫磺泉，有豐富溫泉花。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">滝の湯</p><p class="text-slate-500">源泉水溫高達78度。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">横落の湯</p><p class="text-slate-500">對皮膚病特別有效。</p></div>
-                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">十王堂の湯</p><p class="text-slate-500">混合麻釜與大湯的泉水。</p></div>
-                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
+                            <!-- Sections Reordered Here -->
                             <section id="ski-guide" class="scroll-mt-36">
                                 <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">滑雪完全指南</h2>
                                 <div class="max-w-5xl mx-auto space-y-12">
@@ -538,6 +422,105 @@
                                 </div>
                             </section>
 
+                            <section id="fire-festival" class="scroll-mt-36 py-12 md:py-16 bg-gray-100 rounded-2xl">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#274C77] mb-4">火祭盛典</h2>
+                                <p class="text-center max-w-3xl mx-auto mb-10 text-gray-600">每年1月15日舉行的「道祖神祭典」，是日本三大火祭之一，場面壯觀震撼，為祈求村莊的繁榮與平安。點擊下方時間點以展開詳細內容。</p>
+                                <div class="max-w-3xl mx-auto">
+                                    <div class="relative border-l-4 border-[#274C77] space-y-2">
+                                        <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">下午 1:00 - 原木入村</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">村民們合力將搭建祭典主體「社殿」的巨大原木，從深山中拖曳至祭典會場。這象徵著祭典的正式啟動，充滿了團結與力量。</div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 7:00 - 社殿建成</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">華麗的社殿搭建完成，同時，為村中新生兒祈福的「初燈籠」也陸續送達，形成一片溫暖的燈海。此時的會場充滿了祈福與期待的氛圍。</div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 8:30 - 攻防戰開始</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">祭典的最高潮！手持火把的村民們向社殿發動猛烈攻擊，而負責守護的「厄年」男性們則奮力抵抗。火光、吶喊聲與飛濺的火花交織，場面極為震撼。</div>
+                                            </div>
+                                        </div>
+                                         <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 10:00 - 焚燒社殿</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">激烈的攻防戰結束後，社殿與燈籠被點燃，熊熊火焰直衝天際，象徵著淨化厄運、祈求新的一年平安順遂。</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="village-guide" class="scroll-mt-36">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">溫泉村莊探索</h2>
+                                <div class="max-w-5xl mx-auto space-y-12">
+                                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                           村莊景點地圖
+                                        </h3>
+                                        <a href="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" target="_blank" rel="noopener noreferrer">
+                                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                               <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" alt="野澤溫泉村景點地圖" class="w-full h-auto object-contain">
+                                           </div>
+                                        </a>
+                                    </div>
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20"></path></svg>
+                                           外湯巡禮 (Sotoyu)
+                                        </h3>
+                                        <p class="text-slate-600 mb-6">「外湯」是村民共有的13座免費大眾湯屋。滑雪後泡湯能極大地放鬆肌肉。雖為免費，但建議在捐款箱投入少許金額支持維護。記得自備毛巾與盥洗用品。</p>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-slate-700">夏季 (4月～11月)</p>
+                                                <p>5:00 AM – 11:00 PM</p>
+                                            </div>
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-slate-700">冬季 (12月～3月)</p>
+                                                <p>6:00 AM – 11:00 PM</p>
+                                            </div>
+                                        </div>
+                                        <a href="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" target="_blank" rel="noopener noreferrer" class="block mb-6">
+                                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" alt="13座外湯地圖" class="w-full h-auto object-contain">
+                                            </div>
+                                        </a>
+                                        <a href="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" target="_blank" rel="noopener noreferrer">
+                                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" alt="泡湯禮儀圖解" class="w-full h-auto object-contain">
+                                            </div>
+                                        </a>
+                                        <div class="mt-8">
+                                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-[var(--accent-secondary)] pb-2 mb-6">13座外湯特色一覽</h4>
+                                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">大湯 (Oyu)</p><p class="text-slate-500">指標性湯屋，純硫磺泉。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">河原湯</p><p class="text-slate-500">水溫較高，含石膏-食鹽・硫磺泉。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">秋葉の湯</p><p class="text-slate-500">源自麻釜，含芒硝、石膏的硫磺泉。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">麻釜の湯</p><p class="text-slate-500">對痔瘡、糖尿病有療效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">上寺湯</p><p class="text-slate-500">對切傷、燒傷癒合效果好。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">熊の手洗湯</p><p class="text-slate-500">對燒傷和切傷有療效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">松葉の湯</p><p class="text-slate-500">與麻釜の湯療效相同。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">中尾の湯</p><p class="text-slate-500">最大木造澡堂，對皮膚病有效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">新田の湯</p><p class="text-slate-500">對痔瘡、糖尿病、風濕病有效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">真湯</p><p class="text-slate-500">純硫磺泉，有豐富溫泉花。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">滝の湯</p><p class="text-slate-500">源泉水溫高達78度。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">横落の湯</p><p class="text-slate-500">對皮膚病特別有效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">十王堂の湯</p><p class="text-slate-500">混合麻釜與大湯的泉水。</p></div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
                             <section id="food-guide" class="scroll-mt-36">
                                  <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">美食推薦</h2>
                                 <div class="max-w-5xl mx-auto">
@@ -578,7 +561,7 @@
                                                 </div>
                                                  <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
                                                     <p class="font-bold">ばあどこ (Banri)</p>
-                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">受外國人歡迎，店員會講中文，似乎有素火鍋。<br><span class="text-indigo-600">電話: +81 269-85-2333</span><br><span class="text-green-700 font-semibold">均消約：¥3,000 - ¥5,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">受外國人歡迎，店員會講中文。提供素食選項 (建議預約時確認)。<br><span class="text-indigo-600">電話: +81 269-85-2333</span><br><span class="text-green-700 font-semibold">均消約：¥3,000 - ¥5,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
                                                     <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                                 </div>
                                                  <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
@@ -602,6 +585,38 @@
                                                     <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="transport-guide" class="scroll-mt-36">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">交通指南</h2>
+                                <div class="max-w-4xl mx-auto space-y-8">
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4">交通費用與時間總覽</h3>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-left text-sm">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th class="p-3 font-semibold">路段</th>
+                                                        <th class="p-3 font-semibold">交通工具</th>
+                                                        <th class="p-3 font-semibold text-center">預估時間</th>
+                                                        <th class="p-3 font-semibold text-right">單程費用 (每人)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b"><td class="p-3">成田機場 → 上野</td><td class="p-3">京成電鐵 Skyliner</td><td class="p-3 text-center">約 45 分鐘</td><td class="p-3 text-right font-mono">¥ 2,580</td></tr>
+                                                    <tr class="border-b"><td class="p-3">上野 → 飯山站</td><td class="p-3">北陸新幹線 (Hakutaka)</td><td class="p-3 text-center">約 1 小時 40 分</td><td class="p-3 text-right font-mono">~ ¥ 8,500</td></tr>
+                                                    <tr class="border-b"><td class="p-3">飯山站 → 野澤溫泉</td><td class="p-3">野澤溫泉線巴士</td><td class="p-3 text-center">約 25 分鐘</td><td class="p-3 text-right font-mono">¥ 600</td></tr>
+                                                </tbody>
+                                                <tfoot class="bg-gray-100">
+                                                    <tr>
+                                                        <td colspan="3" class="p-3 font-bold text-[var(--accent-primary)]">單程總計</td>
+                                                        <td class="p-3 text-right font-bold text-[var(--accent-primary)] font-mono">約 ¥ 11,680</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -954,6 +969,28 @@
                 });
             };
             
+            const setupScrollSpy = () => {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(link => {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }, { rootMargin: '-30% 0px -70% 0px' });
+
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            };
+
             const setLastUpdated = () => {
                 const date = new Date();
                 const year = date.getFullYear();
@@ -963,14 +1000,15 @@
                 if (el) el.textContent = `最後更新：${year}/${month}/${day}`;
             }
 
+            // --- Initialize all functions ---
             startCountdown();
             setupChecklist();
             setupBudgetCalculator();
             setupViewToggle();
             setupTimelineAccordion();
+            setupScrollSpy();
             setLastUpdated();
         });
     </script>
 </body>
 </html>
-
