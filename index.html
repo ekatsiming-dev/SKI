@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>野澤溫泉滑雪之旅 | Nozawa Onsen Trip Planner</title>
+    <title>野澤溫泉：粉雪與古老火祭之歌</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,8 +13,9 @@
             --card-bg: #ffffff;
             --text-primary: #212529;
             --text-secondary: #495057;
-            --accent-primary: #1a365d; /* Indigo Night */
-            --accent-secondary: #a97c50; /* Warm Wood */
+            --accent-primary: #274C77; /* Deep Blue */
+            --accent-secondary: #A1C181; /* Sage Green */
+            --accent-highlight: #E63946; /* Fiery Red */
             --border-color: #dee2e6;
         }
         body {
@@ -34,10 +35,25 @@
         .nav-link {
             transition: all 0.2s ease-in-out;
             color: var(--text-secondary);
+            position: relative;
+            padding-bottom: 4px;
         }
         .nav-link:hover, .nav-link.active {
             color: var(--accent-primary);
-            transform: translateY(-2px);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-primary);
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
         .btn-filter {
             transition: all 0.2s ease-in-out;
@@ -48,20 +64,22 @@
             border-color: var(--accent-primary);
         }
         .glass-nav {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         .iti-item::before {
             content: '';
             position: absolute;
-            left: -20.5px;
+            left: -34.5px; 
             top: 50%;
             transform: translateY(-50%);
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             border-radius: 9999px;
             background-color: var(--accent-secondary);
-            border: 3px solid var(--card-bg);
+            border: 4px solid var(--card-bg);
+            z-index: 1;
         }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -80,7 +98,7 @@
             border-radius: 50%;
         }
         .hero-text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.6);
         }
         summary {
             list-style: none;
@@ -90,10 +108,16 @@
             display: none;
         }
         .section-arrow {
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         details[open] .section-arrow {
             transform: rotate(180deg);
+        }
+        .timeline-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
+            padding: 0 1rem;
         }
     </style>
 </head>
@@ -103,10 +127,10 @@
 
         <header class="relative rounded-2xl overflow-hidden shadow-2xl mb-12 h-80 md:h-96 flex items-center justify-center text-center">
             <img src="https://andyventure.com/wp-content/uploads/2024/07/japan_nozawa_onsen_village_20230228_DSC01732.webp" alt="野澤溫泉村莊的冬季夜景" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-black/30"></div>
             <div class="relative z-10 px-4">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white hero-text-shadow">野澤溫泉滑雪之旅</h1>
-                <p class="text-xl sm:text-2xl text-white/90 mt-4 hero-text-shadow tracking-wider">2026 / 1 / 14 (三) &mdash; 1 / 18 (日)</p>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white hero-text-shadow">粉雪與古老火祭之歌</h1>
+                <p class="text-xl sm:text-2xl text-white/90 mt-4 hero-text-shadow tracking-wider">Nozawa Onsen Ski Trip</p>
             </div>
         </header>
 
@@ -120,33 +144,32 @@
             </div>
         </section>
 
-        <nav class="sticky top-4 glass-nav z-20 py-3 mb-20 rounded-full shadow-md border border-gray-200">
+        <nav class="sticky top-4 glass-nav z-30 py-3 mb-20 rounded-full shadow-lg border border-gray-200">
             <div class="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-10 text-sm sm:text-base md:text-lg font-semibold">
                 <a href="#itinerary" class="nav-link">行程總覽</a>
                 <a href="#team" class="nav-link">團隊成員</a>
-                <a href="#village-guide" class="nav-link">村莊探索</a>
-                <a href="#ski-guide" class="nav-link">滑雪指南</a>
-                <a href="#food-guide" class="nav-link">美食推薦</a>
-                <a href="#roadmap" class="nav-link personal-nav-link hidden">參考準備計畫</a>
-                <a href="#checklist" class="nav-link personal-nav-link hidden">參考準備清單</a>
-                <a href="#budget" class="nav-link personal-nav-link hidden">參考預算</a>
+                <a href="#trip-details" class="nav-link">探索野澤</a>
+                <a href="#roadmap" class="nav-link personal-nav-link hidden">準備計畫</a>
+                <a href="#checklist" class="nav-link personal-nav-link hidden">準備清單</a>
+                <a href="#budget" class="nav-link personal-nav-link hidden">預算規劃</a>
             </div>
         </nav>
         
-        <main class="space-y-8">
+        <main class="space-y-16">
 
             <section id="itinerary">
                 <h2 class="text-3xl font-bold text-center mb-12 pb-4 border-b-2 border-gray-200">行程總覽</h2>
-                <div class="max-w-3xl mx-auto relative border-l-2 border-dashed border-yellow-400 pl-10">
+                <div class="max-w-3xl mx-auto relative border-l-4 border-dashed border-[var(--accent-secondary)] pl-16"> 
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 1</p>
-                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">移動與抵達</h3>
+                        <p class="absolute -left-[60px] top-1/2 -translate-y-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10">Day 1</p> 
+                        <h3 class="font-bold text-lg text-[var(--accent-primary)]">移動與抵達</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 14 (三)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
-                            <li>🛬 成田機場 → SKYLINER → 上野</li>
-                            <li>🚄 <strong style="color: var(--accent-secondary);">11:30-13:02</strong> 上野 → 飯山站</li>
-                            <li>🚌 <strong style="color: var(--accent-secondary);">13:40</strong> 飯山站 → 野澤溫泉 (Nozawa Onsen Liner, 約14:05抵達)</li>
-                            <li>先至飯店寄放行李，可至村莊短暫探索後於15:00 Check-in。</li>
+                            <li>🛬 06:30 抵達成田機場</li>
+                            <li>✈️ <strong class="text-[var(--accent-primary)]">10:22-11:07</strong> 成田機場 → 上野 (SKYLINER)</li>
+                            <li>🚄 <strong class="text-[var(--accent-primary)]">11:30-13:02</strong> 上野 → 飯山站 (北陸新幹線 Hakutaka 561)</li>
+                            <li>🚌 <strong class="text-[var(--accent-primary)]">13:40-14:05</strong> 飯山站 → 野澤溫泉 (野沢飯山線巴士)</li>
+                            <li>🏨 先至飯店寄放行李，可至村莊短暫探索後於15:00 Check-in。</li>
                         </ul>
                         <div class="border-t border-dashed border-gray-300 my-4"></div>
                         <div class="space-y-1 text-slate-600">
@@ -155,13 +178,13 @@
                         </div>
                     </div>
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 2</p>
-                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">全日滑雪課程 & 道祖神祭</h3>
+                        <p class="absolute -left-[60px] top-1/2 -translate-y-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10">Day 2</p> 
+                        <h3 class="font-bold text-lg text-[var(--accent-primary)]">全日滑雪課程 & 道祖神祭</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 15 (四)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
-                            <li>全日6小時滑雪技巧學習 (預計 <strong style="color: var(--accent-secondary);">15:30</strong> 結束)</li>
+                            <li>全日6小時滑雪技巧學習 (預計 <strong class="text-[var(--accent-primary)]">15:30</strong> 結束)</li>
                             <li>自由時間：逛溫泉街、購買伴手禮</li>
-                            <li><strong style="color: var(--accent-secondary);">19:00</strong> 在<span class="font-bold">道祖神場</span>參加日本三大火祭之一的「道祖神祭」。</li>
+                            <li><strong class="text-[var(--accent-primary)]">19:00</strong> 在<span class="font-bold">道祖神場</span>參加日本三大火祭之一的「道祖神祭」。</li>
                         </ul>
                         <div class="border-t border-dashed border-gray-300 my-4"></div>
                         <div class="space-y-1 text-slate-600">
@@ -172,25 +195,13 @@
                             <h4 class="font-semibold text-sm text-indigo-800">本日租賃裝備提醒</h4>
                             <p class="text-xs text-indigo-600">雪衣、雪褲、雪板、雪鞋、安全帽、雪鏡、手套、防摔褲、護膝</p>
                         </div>
-                        <div class="mt-4">
-                            <details class="bg-gray-50 rounded-md border border-gray-200">
-                                <summary class="p-3 font-semibold text-sm text-slate-700 flex justify-between items-center">
-                                    <span>深入了解：道祖神祭</span>
-                                    <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </summary>
-                                <div class="p-3 border-t border-gray-200 text-xs text-slate-600 space-y-2">
-                                    <p>「道祖神祭」是日本國家級重要無形民俗文化遺產，為日本三大火祭之一。祭典旨在為村莊驅除厄運、祈求豐收、孩童健康成長及良緣。</p>
-                                    <p>核心儀式圍繞巨大的木造社殿展開，村裡的「厄年」男性們需抵禦其他村民手持火把的激烈進攻。這場攻防戰是祭典最高潮的部分，最終社殿會被點燃，場面極為壯觀。</p>
-                                </div>
-                            </details>
-                        </div>
                     </div>
                      <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 3</p>
-                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">全日滑雪課程 & 溫泉體驗</h3>
+                        <p class="absolute -left-[60px] top-1/2 -translate-y-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10">Day 3</p> 
+                        <h3 class="font-bold text-lg text-[var(--accent-primary)]">全日滑雪課程 & 溫泉體驗</h3>
                         <p class="text-slate-500 text-sm">2026 / 01 / 16 (五)</p>
                          <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
-                             <li>全日6小時滑雪技巧進階 (預計 <strong style="color: var(--accent-secondary);">15:30</strong> 結束)</li>
+                             <li>全日6小時滑雪技巧進階 (預計 <strong class="text-[var(--accent-primary)]">15:30</strong> 結束)</li>
                              <li>自由時間：逛溫泉街、購買伴手禮</li>
                              <li>體驗「外湯巡禮」，感受村民守護的溫泉文化！</li>
                          </ul>
@@ -201,8 +212,8 @@
                          </div>
                     </div>
                     <div class="iti-item relative mb-10 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 4</p>
-                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">自主練習 & 自由探索</h3>
+                        <p class="absolute -left-[60px] top-1/2 -translate-y-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10">Day 4</p> 
+                        <h3 class="font-bold text-lg text-[var(--accent-primary)]">自主練習 & 自由探索</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 17 (六)</p>
                         <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
                             <li>驗收學習成果，在初級雪道自主練習</li>
@@ -216,19 +227,18 @@
                         </div>
                     </div>
                      <div class="iti-item relative bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-                        <p class="absolute -left-10 top-1/2 -translate-y-1/2 bg-[var(--accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded-full">Day 5</p>
-                        <h3 class="font-bold text-lg text-[var(--accent-secondary)]">返程</h3>
+                        <p class="absolute -left-[60px] top-1/2 -translate-y-1/2 bg-[var(--accent-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10">Day 5</p> 
+                        <h3 class="font-bold text-lg text-[var(--accent-primary)]">返程</h3>
                          <p class="text-slate-500 text-sm">2026 / 01 / 18 (日)</p>
                          <ul class="list-disc list-inside mt-2 text-slate-600 space-y-1">
-                             <li>🚌 野澤中央車站 → 飯山站 (預計搭 <strong style="color: var(--accent-secondary);">09:30</strong> 班次, 09:55抵達)</li>
-                             <li>🚄 <strong style="color: var(--accent-secondary);">10:33-12:14</strong> 飯山站 → 上野</li>
-                             <li>🛫 上野 → SKYLINER (可搭 <strong style="color: var(--accent-secondary);">13:13</strong> 或 <strong style="color: var(--accent-secondary);">13:30</strong> 班次) → 成田機場</li>
-                             <li><strong style="color: var(--accent-secondary);">16:35</strong> 搭乘 MM625 返回台灣桃園機場 (TPE)</li>
+                             <li>🚌 <strong class="text-[var(--accent-primary)]">09:32-10:23</strong> 野澤溫泉 → 飯山站 (9號 野沢線巴士)</li>
+                             <li>🚄 <strong class="text-[var(--accent-primary)]">10:33-12:14</strong> 飯山站 → 上野 (北陸新幹線 Hakutaka 558)</li>
+                             <li>✈️ <strong class="text-[var(--accent-primary)]">12:37-13:25</strong> 上野 → 成田機場 (SKYLINER)</li>
+                             <li>🛫 <strong class="text-[var(--accent-primary)]">16:35</strong> 搭乘 MM625 返回台灣桃園機場 (TPE)</li>
                          </ul>
                          <div class="border-t border-dashed border-gray-300 my-4"></div>
                          <div class="space-y-1 text-slate-600">
-                            <p><span class="font-semibold text-sm text-slate-500">午餐推薦：</span>東京車站或成田機場用餐</p>
-                            <p><span class="font-semibold text-sm text-slate-500">晚餐推薦：</span>機上餐食或返抵國門後再決定</p>
+                            <p><span class="font-semibold text-sm text-slate-500">午餐推薦：</span>上野、東京車站或成田機場用餐</p>
                          </div>
                     </div>
                 </div>
@@ -285,245 +295,323 @@
                     </div>
                 </details>
             </section>
-
-            <section id="village-guide">
+            
+            <section id="trip-details">
                 <details>
                     <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">溫泉村莊探索 
+                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">探索野澤：行程亮點
                             <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </h2>
                     </summary>
-                    <div class="max-w-5xl mx-auto space-y-12 mt-12">
-                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                               村莊景點地圖
-                            </h3>
-                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
-                               <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" alt="野澤溫泉村景點地圖" class="w-full h-auto object-contain">
-                           </div>
+                    <div class="mt-12">
+                        <div class="sticky top-[76px] z-20 -mx-4 mb-12">
+                            <div class="bg-gray-50/90 backdrop-blur-md border-b">
+                                <div class="container mx-auto px-4">
+                                    <div class="flex flex-wrap justify-center gap-2 md:gap-4 py-3">
+                                        <a href="#transport-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">交通指南</a>
+                                        <a href="#fire-festival" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">火祭盛典</a>
+                                        <a href="#village-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">村莊探索</a>
+                                        <a href="#ski-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">滑雪指南</a>
+                                        <a href="#food-guide" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-full hover:bg-white hover:text-gray-800 transition-colors shadow-sm">美食推薦</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20"></path></svg>
-                               外湯巡禮 (Sotoyu)
-                            </h3>
-                            <p class="text-slate-600 mb-6">「外湯」是村民共有的13座免費大眾湯屋。滑雪後泡湯能極大地放鬆肌肉。雖為免費，但建議在捐款箱投入少許金額支持維護。記得自備毛巾與盥洗用品。</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
-                                <div class="bg-gray-50 p-4 rounded-lg border">
-                                    <p class="font-bold text-slate-700">夏季 (4月～11月)</p>
-                                    <p>5:00 AM – 11:00 PM</p>
+
+                        <div class="space-y-16">
+                            <section id="transport-guide" class="scroll-mt-36">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">交通指南</h2>
+                                <div class="max-w-4xl mx-auto space-y-8">
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4">交通費用與時間總覽</h3>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-left text-sm">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th class="p-3 font-semibold">路段</th>
+                                                        <th class="p-3 font-semibold">交通工具</th>
+                                                        <th class="p-3 font-semibold text-center">預估時間</th>
+                                                        <th class="p-3 font-semibold text-right">單程費用 (每人)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b"><td class="p-3">成田機場 → 上野</td><td class="p-3">京成電鐵 Skyliner</td><td class="p-3 text-center">約 45 分鐘</td><td class="p-3 text-right font-mono">¥ 2,580</td></tr>
+                                                    <tr class="border-b"><td class="p-3">上野 → 飯山站</td><td class="p-3">北陸新幹線 (Hakutaka)</td><td class="p-3 text-center">約 1 小時 40 分</td><td class="p-3 text-right font-mono">~ ¥ 8,500</td></tr>
+                                                    <tr class="border-b"><td class="p-3">飯山站 → 野澤溫泉</td><td class="p-3">野澤溫泉線巴士</td><td class="p-3 text-center">約 25 分鐘</td><td class="p-3 text-right font-mono">¥ 600</td></tr>
+                                                </tbody>
+                                                <tfoot class="bg-gray-100">
+                                                    <tr>
+                                                        <td colspan="3" class="p-3 font-bold text-[var(--accent-primary)]">單程總計</td>
+                                                        <td class="p-3 text-right font-bold text-[var(--accent-primary)] font-mono">約 ¥ 11,680</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="bg-gray-50 p-4 rounded-lg border">
-                                    <p class="font-bold text-slate-700">冬季 (12月～3月)</p>
-                                    <p>6:00 AM – 11:00 PM</p>
+                            </section>
+                            
+                            <section id="fire-festival" class="scroll-mt-36 py-12 md:py-16 bg-gray-100 rounded-2xl">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[#274C77] mb-4">火祭盛典</h2>
+                                <p class="text-center max-w-3xl mx-auto mb-10 text-gray-600">每年1月15日舉行的「道祖神祭典」，是日本三大火祭之一，場面壯觀震撼，為祈求村莊的繁榮與平安。點擊下方時間點以展開詳細內容。</p>
+                                <div class="max-w-3xl mx-auto">
+                                    <div class="relative border-l-4 border-[#274C77] space-y-2">
+                                        <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">下午 1:00 - 原木入村</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">村民們合力將搭建祭典主體「社殿」的巨大原木，從深山中拖曳至祭典會場。這象徵著祭典的正式啟動，充滿了團結與力量。</div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 7:00 - 社殿建成</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">華麗的社殿搭建完成，同時，為村中新生兒祈福的「初燈籠」也陸續送達，形成一片溫暖的燈海。此時的會場充滿了祈福與期待的氛圍。</div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 8:30 - 攻防戰開始</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">祭典的最高潮！手持火把的村民們向社殿發動猛烈攻擊，而負責守護的「厄年」男性們則奮力抵抗。火光、吶喊聲與飛濺的火花交織，場面極為震撼。</div>
+                                            </div>
+                                        </div>
+                                         <div class="timeline-item pl-8">
+                                            <div class="timeline-point absolute w-4 h-4 bg-[#E63946] rounded-full mt-1.5 -left-2.5 border-4 border-white shadow-md"></div>
+                                            <button class="timeline-trigger w-full text-left font-bold text-lg p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-all">晚上 10:00 - 焚燒社殿</button>
+                                            <div class="timeline-content">
+                                                <div class="bg-white p-4 mt-2 rounded-lg border">激烈的攻防戰結束後，社殿與燈籠被點燃，熊熊火焰直衝天際，象徵著淨化厄運、祈求新的一年平安順遂。</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="bg-gray-100 rounded-lg overflow-hidden border mb-6">
-                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" alt="13座外湯地圖" class="w-full h-auto object-contain">
-                            </div>
-                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
-                                <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" alt="泡湯禮儀圖解" class="w-full h-auto object-contain">
-                            </div>
-                            <div class="mt-8">
-                                 <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">13座外湯特色一覽</h4>
-                                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">大湯 (Oyu)</p><p class="text-slate-500">指標性湯屋，純硫磺泉。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">河原湯</p><p class="text-slate-500">水溫較高，含石膏-食鹽・硫磺泉。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">秋葉の湯</p><p class="text-slate-500">源自麻釜，含芒硝、石膏的硫磺泉。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">麻釜の湯</p><p class="text-slate-500">對痔瘡、糖尿病有療效。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">上寺湯</p><p class="text-slate-500">對切傷、燒傷癒合效果好。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">熊の手洗湯</p><p class="text-slate-500">對燒傷和切傷有療效。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">松葉の湯</p><p class="text-slate-500">與麻釜の湯療效相同。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">中尾の湯</p><p class="text-slate-500">最大木造澡堂，對皮膚病有效。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">新田の湯</p><p class="text-slate-500">對痔瘡、糖尿病、風濕病有效。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">真湯</p><p class="text-slate-500">純硫磺泉，有豐富溫泉花。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">滝の湯</p><p class="text-slate-500">源泉水溫高達78度。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">横落の湯</p><p class="text-slate-500">對皮膚病特別有效。</p></div>
-                                     <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">十王堂の湯</p><p class="text-slate-500">混合麻釜與大湯的泉水。</p></div>
-                                 </div>
-                            </div>
+                            </section>
+
+                            <section id="village-guide" class="scroll-mt-36">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">溫泉村莊探索</h2>
+                                <div class="max-w-5xl mx-auto space-y-12">
+                                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                           村莊景點地圖
+                                        </h3>
+                                        <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                           <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/nozawa_onsen_village_map_small.jpg" alt="野澤溫泉村景點地圖" class="w-full h-auto object-contain">
+                                       </div>
+                                    </div>
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20"></path></svg>
+                                           外湯巡禮 (Sotoyu)
+                                        </h3>
+                                        <p class="text-slate-600 mb-6">「外湯」是村民共有的13座免費大眾湯屋。滑雪後泡湯能極大地放鬆肌肉。雖為免費，但建議在捐款箱投入少許金額支持維護。記得自備毛巾與盥洗用品。</p>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-slate-700">夏季 (4月～11月)</p>
+                                                <p>5:00 AM – 11:00 PM</p>
+                                            </div>
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-slate-700">冬季 (12月～3月)</p>
+                                                <p>6:00 AM – 11:00 PM</p>
+                                            </div>
+                                        </div>
+                                        <div class="bg-gray-100 rounded-lg overflow-hidden border mb-6">
+                                            <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/sotoyu_map.jpg" alt="13座外湯地圖" class="w-full h-auto object-contain">
+                                        </div>
+                                        <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                            <img src="https://andyventure.com/wp-content/uploads/japan/nozawa_onsen_village/onsen_bath_guide.jpg" alt="泡湯禮儀圖解" class="w-full h-auto object-contain">
+                                        </div>
+                                        <div class="mt-8">
+                                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-[var(--accent-secondary)] pb-2 mb-6">13座外湯特色一覽</h4>
+                                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">大湯 (Oyu)</p><p class="text-slate-500">指標性湯屋，純硫磺泉。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">河原湯</p><p class="text-slate-500">水溫較高，含石膏-食鹽・硫磺泉。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">秋葉の湯</p><p class="text-slate-500">源自麻釜，含芒硝、石膏的硫磺泉。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">麻釜の湯</p><p class="text-slate-500">對痔瘡、糖尿病有療效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">上寺湯</p><p class="text-slate-500">對切傷、燒傷癒合效果好。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">熊の手洗湯</p><p class="text-slate-500">對燒傷和切傷有療效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">松葉の湯</p><p class="text-slate-500">與麻釜の湯療效相同。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">中尾の湯</p><p class="text-slate-500">最大木造澡堂，對皮膚病有效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">新田の湯</p><p class="text-slate-500">對痔瘡、糖尿病、風濕病有效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">真湯</p><p class="text-slate-500">純硫磺泉，有豐富溫泉花。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">滝の湯</p><p class="text-slate-500">源泉水溫高達78度。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">横落の湯</p><p class="text-slate-500">對皮膚病特別有效。</p></div>
+                                                 <div class="bg-white p-3 rounded-lg shadow-sm border"><p class="font-bold">十王堂の湯</p><p class="text-slate-500">混合麻釜與大湯的泉水。</p></div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="ski-guide" class="scroll-mt-36">
+                                <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">滑雪完全指南</h2>
+                                <div class="max-w-5xl mx-auto space-y-12">
+                                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L20 12 4.447 19.106A1 1 0 013 18.212V17"></path></svg>
+                                           飯店至雪場路線圖
+                                        </h3>
+                                        <div class="bg-gray-100 rounded-lg overflow-hidden border">
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d6379.799723049007!2d138.44199302196397!3d36.91835338169145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x5ff61b5ae178668d%3A0x85073d9e6ac629b7!2zWWFtYXNhbnNvLCA2NTE5IFRveW9zYXRvLCBOb3phd2FvbnNlbiwgU2hpbW90YWthaSBHdW4sIE5hZ2FubyAzODktMjUwMi5qYXBhbg!3m2!1d36.9162856!2d138.4422852!4m5!1s0x5ff605299256ce13%3A0x93879d18bb530dba!2z5rC45r6k5rqr5rOJ5ruR5ry-6Zuq5aC0LCA3NjUzIFRveW9zYXRvLCBOb3phd2FvbnNlbiwgU2hpbW90YWthaSBHdW4sIE5hZ2FubyAzODktMjUwMi4gSmFwYW4!3m2!1d36.9206775!2d138.4523232!5e0!3m2!1sen!2stw!4v1759328221184!5m2!1sen!2stw" class="w-full h-80 md:h-96" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                           滑雪服裝準備
+                                        </h3>
+                                        <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                                            <div class="border border-gray-200 p-4 rounded-lg">
+                                                <h4 class="font-bold text-slate-700">① 底層：吸濕排汗</h4>
+                                                <p class="text-sm text-slate-500 mt-2">功能：保持身體乾爽。<br>材質：聚酯纖維、羊毛等機能性布料。<br><strong class="text-red-600">絕對避免棉質！</strong></p>
+                                            </div>
+                                            <div class="border border-gray-200 p-4 rounded-lg">
+                                                <h4 class="font-bold text-slate-700">② 中層：保暖</h4>
+                                                <p class="text-sm text-slate-500 mt-2">功能：鎖住熱空氣，隔絕冷空氣。<br>材質：刷毛 (Fleece)、輕羽絨、化纖外套。</p>
+                                            </div>
+                                            <div class="border border-gray-200 p-4 rounded-lg">
+                                                <h4 class="font-bold text-slate-700">③ 外層：防水防風</h4>
+                                                <p class="text-sm text-slate-500 mt-2">功能：抵禦風、雪、雨。<br>材質：專業雪衣雪褲 (Gore-Tex 等)。</p>
+                                            </div>
+                                        </div>
+                                         <div class="bg-gray-50 p-4 rounded-lg border">
+                                            <h4 class="font-semibold text-slate-700 mb-3 text-center">裝備檢查清單</h4>
+                                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                                <div><strong class="text-slate-600">頭部：</strong><p>毛帽、脖圍</p></div>
+                                                <div><strong class="text-slate-600">上半身：</strong><p>底層衣、中層衣</p></div>
+                                                <div><strong class="text-slate-600">下半身：</strong><p>底層褲</p></div>
+                                                <div><strong class="text-slate-600">手腳：</strong><p>防水手套、羊毛長雪襪</p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                         <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                            雪道推薦
+                                        </h3>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            <div class="border border-green-300 bg-green-50 p-4 rounded-lg">
+                                                <h4 class="font-bold text-green-700">新手推薦</h4>
+                                                <p class="text-sm text-green-600 mt-1">寬廣平緩，適合初學</p>
+                                                <p class="mt-2 font-semibold">上ノ平ゲレンデ (Uenotaira)</p>
+                                            </div>
+                                            <div class="border border-blue-300 bg-blue-50 p-4 rounded-lg">
+                                                <h4 class="font-bold text-blue-700">中手挑戰</h4>
+                                                <p class="text-sm text-blue-600 mt-1">多樣地形，練習技巧</p>
+                                                <p class="mt-2 font-semibold">やまびこ A-Eコース (Yamabiko)</p>
+                                            </div>
+                                             <div class="border border-red-300 bg-red-50 p-4 rounded-lg">
+                                                <h4 class="font-bold text-red-700">高手專區</h4>
+                                                <p class="text-sm text-red-600 mt-1">最大斜度39度，挑戰粉雪</p>
+                                                <p class="mt-2 font-semibold">シュナイダーコース (Schneider)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
+                                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                           滑雪安全須知
+                                        </h3>
+                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-lg mb-2">① 正確跌倒，保護自己</p>
+                                                <p class="text-slate-600">感覺快要失控時，主動向後方或側後方坐倒。**核心技巧是「用屁股著地」**，絕對不要用手腕去撐地，非常容易造成手腕骨折。</p>
+                                            </div>
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-lg mb-2">② 選擇適合自己的雪道</p>
+                                                <p class="text-slate-600">雪場會用顏色標示雪道難度（綠線：初級）。請務必在教練指導下，從綠線開始，**不要輕易挑戰超出自己能力的雪道**。</p>
+                                            </div>
+                                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-lg mb-2">③ 隨時注意周遭環境</p>
+                                                <p class="text-slate-600">在雪道上休息或停留時，請務必停在**雪道的兩側**，避免停在雪道中間或轉彎處的死角，以免被後方滑行者撞上。</p>
+                                            </div>
+                                             <div class="bg-gray-50 p-4 rounded-lg border">
+                                                <p class="font-bold text-lg mb-2">④ 安全裝備不可少</p>
+                                                <p class="text-slate-600">**安全帽是必備品**，能有效保護頭部。雪鏡和護具（如防摔褲、護膝）也能大幅增加安全性。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="food-guide" class="scroll-mt-36">
+                                 <h2 class="text-2xl md:text-3xl font-bold text-center text-[var(--accent-primary)] mb-8">美食推薦</h2>
+                                <div class="max-w-5xl mx-auto">
+                                    <div>
+                                        <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-6 flex items-center gap-2">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253V5.5A2.25 2.25 0 0114.25 3h.5A2.25 2.25 0 0117 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 6.253V5.5A2.25 2.25 0 0110.5 3h.5A2.25 2.25 0 0113 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.25 17.747V19.5a.75.75 0 00.75.75h12a.75.75 0 00.75-.75v-1.753"></path></svg>
+                                            餐廳口袋名單
+                                        </h3>
+                                        
+                                        <div class="mb-8">
+                                            <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-[var(--accent-secondary)] pb-2 mb-6">住宿附近</h4>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">焼肉 やま冨士</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">肉舖老闆開的燒肉店，便宜好吃但煙霧繚繞。<br><span class="text-indigo-600">電話: +81 269-85-2121</span><br><span class="text-green-700 font-semibold">均消約：¥4,000 - ¥6,000</span><br><span class="text-red-500 font-semibold">(建議10人務必預約)</span></p>
+                                                    <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">お好み焼き 一ちゃん</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">住宿附近的大阪燒，有搭配部分小點心。<br><span class="text-indigo-600">電話: +81 269-85-3230</span><br><span class="text-green-700 font-semibold">均消約：¥1,000 - ¥2,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
+                                                    <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                             <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-[var(--accent-secondary)] pb-2 mb-6">溫泉街中心</h4>
+                                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">大門 (Daimon)</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">份量不錯的豬排飯、餃子。<br><span class="text-indigo-600">電話: +81 269-85-2570</span><br><span class="text-green-700 font-semibold">均消約：¥1,500 - ¥2,500</span><br><span class="text-red-500 font-semibold">(不接受預約，10人需有排隊或分開坐的準備)</span></p>
+                                                    <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">ちゃんこ玉屋</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">不起眼的相撲鍋與壽喜燒火鍋店。<br><span class="text-indigo-600">電話: +81 269-85-2435</span><br><span class="text-green-700 font-semibold">均消約：¥3,000 - ¥5,000</span><br><span class="text-red-500 font-semibold">(建議10人務必預約)</span></p>
+                                                    <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">ばあどこ (Banri)</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">受外國人歡迎，店員會講中文，似乎有素火鍋。<br><span class="text-indigo-600">電話: +81 269-85-2333</span><br><span class="text-green-700 font-semibold">均消約：¥3,000 - ¥5,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
+                                                    <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">大まるそば店</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">蕎麥麵店，冬季似乎有熱湯選項。<br><span class="text-indigo-600">電話: +81 269-85-2038</span><br><span class="text-green-700 font-semibold">均消約：¥1,000 - ¥2,000</span><br><span class="text-red-500 font-semibold">(建議10人預約詢問)</span></p>
+                                                    <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">三吉 (San-kichi)</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">關東煮，特色是有賣馬肉刺身。<br><span class="text-indigo-600">電話: +81 269-85-3933</span><br><span class="text-green-700 font-semibold">均消約：¥2,000 - ¥4,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
+                                                    <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">そば処 大茂ん</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">可預約牛肉壽喜燒的蕎麥麵店。<br><span class="text-indigo-600">電話: +81 269-85-2032</span><br><span class="text-green-700 font-semibold">均消約：¥1,000 - ¥2,000</span><br><span class="text-red-500 font-semibold">(可預約，10人建議務必預約)</span></p>
+                                                    <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                                 <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
+                                                    <p class="font-bold">Playce Nozawa</p>
+                                                    <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">同時賣披薩、拉麵，晚上是居酒屋。<br><span class="text-indigo-600">電話: +81 269-67-0407</span><br><span class="text-green-700 font-semibold">均消約：¥1,500 - ¥3,000</span><br><span class="text-red-500 font-semibold">(建議10人預約詢問)</span></p>
+                                                    <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </details>
             </section>
-
-            <section id="ski-guide">
-                 <details>
-                    <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">滑雪完全指南
-                            <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </h2>
-                    </summary>
-                    <div class="max-w-5xl mx-auto space-y-12 mt-12">
-                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L20 12 4.447 19.106A1 1 0 013 18.212V17"></path></svg>
-                               飯店至雪場路線圖
-                            </h3>
-                            <div class="bg-gray-100 rounded-lg overflow-hidden border">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d6379.799723049007!2d138.44199302196397!3d36.91835338169145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x5ff61b5ae178668d%3A0x85073d9e6ac629b7!2zWWFtYXNhbnNvLCA2NTE5IFRveW9zYXRvLCBOb3phd2FvbnNlbiwgU2hpbW90YWthaSBHdW4sIE5hZ2FubyAzODktMjUwMi5qYXBhbg!3m2!1d36.9162856!2d138.4422852!4m5!1s0x5ff605299256ce13%3A0x93879d18bb530dba!2z5rC45r6k5rqr5rOJ5ruR5ry-6Zuq5aC0LCA3NjUzIFRveW9zYXRvLCBOb3phd2FvbnNlbiwgU2hpbW90YWthaSBHdW4sIE5hZ2FubyAzODktMjUwMi4gSmFwYW4!3m2!1d36.9206775!2d138.4523232!5e0!3m2!1sen!2stw!4v1759328221184!5m2!1sen!2stw" class="w-full h-80 md:h-96" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                               滑雪服裝準備
-                            </h3>
-                            <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                                <div class="border border-gray-200 p-4 rounded-lg">
-                                    <h4 class="font-bold text-slate-700">① 底層：吸濕排汗</h4>
-                                    <p class="text-sm text-slate-500 mt-2">功能：保持身體乾爽。<br>材質：聚酯纖維、羊毛等機能性布料。<br><strong class="text-red-600">絕對避免棉質！</strong></p>
-                                </div>
-                                <div class="border border-gray-200 p-4 rounded-lg">
-                                    <h4 class="font-bold text-slate-700">② 中層：保暖</h4>
-                                    <p class="text-sm text-slate-500 mt-2">功能：鎖住熱空氣，隔絕冷空氣。<br>材質：刷毛 (Fleece)、輕羽絨、化纖外套。</p>
-                                </div>
-                                <div class="border border-gray-200 p-4 rounded-lg">
-                                    <h4 class="font-bold text-slate-700">③ 外層：防水防風</h4>
-                                    <p class="text-sm text-slate-500 mt-2">功能：抵禦風、雪、雨。<br>材質：專業雪衣雪褲 (Gore-Tex 等)。</p>
-                                </div>
-                            </div>
-                             <div class="bg-gray-50 p-4 rounded-lg border">
-                                <h4 class="font-semibold text-slate-700 mb-3 text-center">裝備檢查清單</h4>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                                    <div><strong class="text-slate-600">頭部：</strong><p>毛帽、脖圍</p></div>
-                                    <div><strong class="text-slate-600">上半身：</strong><p>底層衣、中層衣</p></div>
-                                    <div><strong class="text-slate-600">下半身：</strong><p>底層褲</p></div>
-                                    <div><strong class="text-slate-600">手腳：</strong><p>防水手套、羊毛長雪襪</p></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                             <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                雪道推薦
-                            </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div class="border border-gray-200 p-4 rounded-lg">
-                                    <h4 class="font-bold text-green-600">新手推薦</h4>
-                                    <p class="text-sm text-slate-500 mt-1">寬廣平緩，適合初學</p>
-                                    <p class="mt-2 font-semibold">上ノ平ゲレンデ (Uenotaira)</p>
-                                </div>
-                                <div class="border border-gray-200 p-4 rounded-lg">
-                                    <h4 class="font-bold text-blue-600">中手挑戰</h4>
-                                    <p class="text-sm text-slate-500 mt-1">多樣地形，練習技巧</p>
-                                    <p class="mt-2 font-semibold">やまびこ A-Eコース (Yamabiko)</p>
-                                </div>
-                                 <div class="border border-gray-200 p-4 rounded-lg">
-                                    <h4 class="font-bold text-red-600">高手專區</h4>
-                                    <p class="text-sm text-slate-500 mt-1">最大斜度39度，挑戰粉雪</p>
-                                    <p class="mt-2 font-semibold">シュナイダーコース (Schneider)</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-4 flex items-center gap-2">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                               滑雪安全須知
-                            </h3>
-                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="bg-white p-4 rounded-lg">
-                                    <p class="font-bold text-lg mb-2">① 正確跌倒，保護自己</p>
-                                    <p class="text-slate-600">感覺快要失控時，主動向後方或側後方坐倒。**核心技巧是「用屁股著地」**，絕對不要用手腕去撐地，非常容易造成手腕骨折。</p>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg">
-                                    <p class="font-bold text-lg mb-2">② 選擇適合自己的雪道</p>
-                                    <p class="text-slate-600">雪場會用顏色標示雪道難度（綠線：初級）。請務必在教練指導下，從綠線開始，**不要輕易挑戰超出自己能力的雪道**。</p>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg">
-                                    <p class="font-bold text-lg mb-2">③ 隨時注意周遭環境</p>
-                                    <p class="text-slate-600">在雪道上休息或停留時，請務必停在**雪道的兩側**，避免停在雪道中間或轉彎處的死角，以免被後方滑行者撞上。</p>
-                                </div>
-                                 <div class="bg-white p-4 rounded-lg">
-                                    <p class="font-bold text-lg mb-2">④ 安全裝備不可少</p>
-                                    <p class="text-slate-600">**安全帽是必備品**，能有效保護頭部。雪鏡和護具（如防摔褲、護膝）也能大幅增加安全性。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </details>
-            </section>
-
-            <section id="food-guide">
-                <details>
-                    <summary>
-                        <h2 class="text-3xl font-bold text-center mb-0 flex items-center justify-center cursor-pointer">美食推薦
-                            <svg class="w-6 h-6 ml-2 section-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </h2>
-                    </summary>
-                    <div class="max-w-5xl mx-auto mt-12">
-                        <div>
-                            <h3 class="font-bold text-xl text-[var(--accent-primary)] mb-6 flex items-center gap-2">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253V5.5A2.25 2.25 0 0114.25 3h.5A2.25 2.25 0 0117 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 6.253V5.5A2.25 2.25 0 0110.5 3h.5A2.25 2.25 0 0113 5.25V6.253"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.25 17.747V19.5a.75.75 0 00.75.75h12a.75.75 0 00.75-.75v-1.753"></path></svg>
-                                餐廳口袋名單
-                            </h3>
-                            
-                            <div class="mb-8">
-                                <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">住宿附近</h4>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">焼肉 やま冨士</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">肉舖老闆開的燒肉店，便宜好吃但煙霧繚繞。<br><span class="text-indigo-600">電話: +81 269-85-2121</span><br><span class="text-green-700 font-semibold">均消約：¥4,000 - ¥6,000</span><br><span class="text-red-500 font-semibold">(建議10人務必預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/Xema4Wy5LFK4bmQe8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">お好み焼き 一ちゃん</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">住宿附近的大阪燒，有搭配部分小點心。<br><span class="text-indigo-600">電話: +81 269-85-3230</span><br><span class="text-green-700 font-semibold">均消約：¥1,000 - ¥2,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/dHJZGWeLGyB854178" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                 <h4 class="font-semibold text-lg text-slate-700 border-b-2 border-yellow-400 pb-2 mb-6">溫泉街中心</h4>
-                                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">大門 (Daimon)</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">份量不錯的豬排飯、餃子。<br><span class="text-indigo-600">電話: +81 269-85-2570</span><br><span class="text-green-700 font-semibold">均消約：¥1,500 - ¥2,500</span><br><span class="text-red-500 font-semibold">(不接受預約，10人需有排隊或分開坐的準備)</span></p>
-                                        <a href="https://maps.app.goo.gl/9auQUjGnYBL4dRXXA" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">ちゃんこ玉屋</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">不起眼的相撲鍋與壽喜燒火鍋店。<br><span class="text-indigo-600">電話: +81 269-85-2435</span><br><span class="text-green-700 font-semibold">均消約：¥3,000 - ¥5,000</span><br><span class="text-red-500 font-semibold">(建議10人務必預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/MaDPYRLNsiBhJvw9A" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">ばあどこ (Banri)</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">受外國人歡迎，店員會講中文，似乎有素火鍋。<br><span class="text-indigo-600">電話: +81 269-85-2333</span><br><span class="text-green-700 font-semibold">均消約：¥3,000 - ¥5,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/z8jz93uj8dTezBpQ8" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">大まるそば店</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">蕎麥麵店，冬季似乎有熱湯選項。<br><span class="text-indigo-600">電話: +81 269-85-2038</span><br><span class="text-green-700 font-semibold">均消約：¥1,000 - ¥2,000</span><br><span class="text-red-500 font-semibold">(建議10人預約詢問)</span></p>
-                                        <a href="https://maps.app.goo.gl/ZeLmRx18DeLYtofn6" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">三吉 (San-kichi)</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">關東煮，特色是有賣馬肉刺身。<br><span class="text-indigo-600">電話: +81 269-85-3933</span><br><span class="text-green-700 font-semibold">均消約：¥2,000 - ¥4,000</span><br><span class="text-red-500 font-semibold">(建議10人預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/ZNtxotnGAbYGGa4o9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                    <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">そば処 大茂ん</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">可預約牛肉壽喜燒的蕎麥麵店。<br><span class="text-indigo-600">電話: +81 269-85-2032</span><br><span class="text-green-700 font-semibold">均消約：¥1,000 - ¥2,000</span><br><span class="text-red-500 font-semibold">(可預約，10人建議務必預約)</span></p>
-                                        <a href="https://maps.app.goo.gl/i7GPzm396qtZyn62A" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                     <div class="bg-white p-5 rounded-lg shadow border transition-transform hover:scale-105 hover:shadow-xl flex flex-col">
-                                        <p class="font-bold">Playce Nozawa</p>
-                                        <p class="text-sm text-slate-500 mt-1 mb-3 flex-grow">同時賣披薩、拉麵，晚上是居酒屋。<br><span class="text-indigo-600">電話: +81 269-67-0407</span><br><span class="text-green-700 font-semibold">均消約：¥1,500 - ¥3,000</span><br><span class="text-red-500 font-semibold">(建議10人預約詢問)</span></p>
-                                        <a href="https://maps.app.goo.gl/Yp6cHT3zhVovRM7A9" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-[var(--accent-primary)] hover:underline mt-auto">查看地圖 →</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </details>
-            </section>
             
-            <div id="personal-sections" class="hidden space-y-8">
+            <div id="personal-sections" class="hidden space-y-16">
                 <section id="roadmap">
                     <details>
                         <summary>
@@ -674,12 +762,13 @@
                 { label: '🍜 餐飲', cost: 10000 },
                 { label: '🎟️ 雪票', cost: 5000 },
                 { label: '🎿 雪具', cost: 3500 },
-                { label: '🚄 交通', cost: 4200 }
+                { label: '🚄 交通', cost: 5000 }
             ];
 
             const startCountdown = () => {
                 const targetDate = new Date('2026-01-14T00:00:00').getTime();
                 const countdownEl = document.getElementById('countdown');
+                if (!countdownEl) return;
                 const interval = setInterval(() => {
                     const now = new Date().getTime();
                     const distance = targetDate - now;
@@ -696,6 +785,8 @@
             const setupChecklist = () => {
                 const filtersContainer = document.getElementById('checklist-filters');
                 const checklistContainer = document.getElementById('checklist-container');
+                if (!filtersContainer || !checklistContainer) return;
+
                 const categories = { 'all': '全部項目', 'buy': '自行採購', 'pack': '打包用品' };
 
                 const renderChecklist = (filter = 'all') => {
@@ -740,6 +831,7 @@
                 const subtotalEl = document.getElementById('subtotal-cost');
                 const totalEl = document.getElementById('total-cost');
                 const tableBody = document.getElementById('budget-table-body');
+                if (!spendingSlider || !spendingValueEl || !subtotalEl || !totalEl || !tableBody) return;
                 
                 const formatCurrency = (num) => `TWD ${num.toLocaleString()}`;
 
@@ -747,7 +839,7 @@
                     tableBody.innerHTML = '';
                     budgetItems.forEach(item => {
                         const row = `
-                            <tr class="border-b border-gray-200">
+                            <tr class="border-b border-gray-100">
                                 <td class="py-3 pr-2">${item.label}</td>
                                 <td class="py-3 text-right font-semibold">${item.cost.toLocaleString()}</td>
                             </tr>`;
@@ -810,6 +902,7 @@
             
             const setupViewToggle = () => {
                 const toggleBtnBottom = document.getElementById('toggle-personal-sections-bottom');
+                if (!toggleBtnBottom) return;
 
                 const personalSections = document.getElementById('personal-sections');
                 const personalNavLinks = document.querySelectorAll('.personal-nav-link');
@@ -834,9 +927,31 @@
                     }
                 }
                 
-                if(toggleBtnBottom) {
-                    toggleBtnBottom.addEventListener('click', performToggle);
-                }
+                toggleBtnBottom.addEventListener('click', performToggle);
+            };
+
+            const setupTimelineAccordion = () => {
+                const triggers = document.querySelectorAll('.timeline-trigger');
+                triggers.forEach(trigger => {
+                    trigger.addEventListener('click', () => {
+                        const content = trigger.nextElementSibling;
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                            content.style.padding = '0 1rem';
+                        } else {
+                            // Close other open items
+                            triggers.forEach(otherTrigger => {
+                                const otherContent = otherTrigger.nextElementSibling;
+                                if(otherContent && otherContent.style.maxHeight){
+                                   otherContent.style.maxHeight = null;
+                                   otherContent.style.padding = '0 1rem';
+                                }
+                            });
+                            content.style.maxHeight = content.scrollHeight + "px";
+                            content.style.padding = '0 0 1rem 0';
+                        }
+                    });
+                });
             };
             
             const setLastUpdated = () => {
@@ -844,29 +959,18 @@
                 const year = date.getFullYear();
                 const month = (date.getMonth() + 1).toString().padStart(2, '0');
                 const day = date.getDate().toString().padStart(2, '0');
-                document.getElementById('last-updated').textContent = `最後更新：${year}/${month}/${day}`;
+                const el = document.getElementById('last-updated');
+                if (el) el.textContent = `最後更新：${year}/${month}/${day}`;
             }
-
-            // Simple logic for the details/summary accordion arrow
-            document.querySelectorAll('details').forEach((detail) => {
-                detail.addEventListener('toggle', (event) => {
-                    const arrow = detail.querySelector('summary svg');
-                    if (arrow) {
-                        if (detail.open) {
-                            arrow.style.transform = 'rotate(180deg)';
-                        } else {
-                            arrow.style.transform = 'rotate(0deg)';
-                        }
-                    }
-                });
-            });
 
             startCountdown();
             setupChecklist();
             setupBudgetCalculator();
             setupViewToggle();
+            setupTimelineAccordion();
             setLastUpdated();
         });
     </script>
 </body>
 </html>
+
